@@ -1,0 +1,1249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>World War II.kmz</name>
+	<open>1</open>
+	<Style id="sh_ylw-pushpin0">
+		<IconStyle>
+			<scale>1.3</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<StyleMap id="msn_ylw-pushpin8">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-pushpin22</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-pushpin160</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sn_ylw-pushpin130">
+	</Style>
+	<Style id="sh_ylw-pushpin130">
+		<IconStyle>
+			<scale>1.2</scale>
+		</IconStyle>
+	</Style>
+	<Style id="sn_ylw-pushpin1131">
+	</Style>
+	<StyleMap id="msn_ylw-pushpin320">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-pushpin510</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-pushpin140</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sn_ylw-pushpin60">
+	</Style>
+	<StyleMap id="msn_ylw-pushpin46112">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-pushpin1131</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-pushpin0</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sh_ylw-pushpin160">
+		<IconStyle>
+			<scale>1.2</scale>
+		</IconStyle>
+	</Style>
+	<Style id="sh_ylw-pushpin140">
+		<IconStyle>
+			<scale>1.2</scale>
+		</IconStyle>
+	</Style>
+	<Style id="sh_ylw-pushpin_copy:0_copy321">
+		<IconStyle>
+			<scale>1.2</scale>
+		</IconStyle>
+	</Style>
+	<Style id="sn_ylw-pushpin510">
+	</Style>
+	<StyleMap id="msn_ylw-pushpin50">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-pushpin130</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-pushpin6</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sn_ylw-pushpin020">
+	</Style>
+	<Style id="sn_ylw-pushpin_copy:0_copy33">
+	</Style>
+	<Style id="sh_ylw-pushpin17">
+		<IconStyle>
+			<scale>1.2</scale>
+		</IconStyle>
+	</Style>
+	<Style id="sn_ylw-pushpin1410">
+	</Style>
+	<StyleMap id="msn_ylw-pushpin_copy:0_copy501112">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-pushpin_copy:0_copy481</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-pushpin_copy:0_copy47111</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sn_ylw-pushpin22">
+	</Style>
+	<Style id="sh_ylw-pushpin220">
+		<IconStyle>
+			<scale>1.2</scale>
+		</IconStyle>
+	</Style>
+	<StyleMap id="msn_ylw-pushpin_copy:0_copy4313111">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-pushpin_copy:0_copy33</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-pushpin_copy:0_copy321</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sn_ylw-pushpin_copy:0_copy481">
+	</Style>
+	<Style id="sh_ylw-pushpin_copy:0_copy491">
+		<IconStyle>
+			<scale>1.2</scale>
+		</IconStyle>
+	</Style>
+	<Style id="sh_ylw-pushpin_copy:0_copy47111">
+		<IconStyle>
+			<scale>1.2</scale>
+		</IconStyle>
+	</Style>
+	<Style id="sn_ylw-pushpin_copy:0_copy5001">
+	</Style>
+	<StyleMap id="msn_ylw-pushpin130">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-pushpin60</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-pushpin17</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="msn_ylw-pushpin_copy:0_copy5211111">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-pushpin_copy:0_copy5001</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-pushpin_copy:0_copy491</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sh_ylw-pushpin6">
+		<IconStyle>
+			<scale>1.2</scale>
+		</IconStyle>
+	</Style>
+	<StyleMap id="msn_ylw-pushpin140">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-pushpin020</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-pushpin130</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="msn_ylw-pushpin11">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-pushpin1410</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-pushpin220</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Folder>
+		<name>World War II</name>
+		<open>1</open>
+		<description><![CDATA[<img src="http://media.wwnorton.com/college/history/US History Tours/norton_logo.jpg" />
+
+
+<hr color="#482b1d" size="1" />
+
+<table width="500">
+<tr><td>
+
+<!-- ******* Start - Insert Main Content  *******-->
+
+
+<!-- ******* 
+Note: 
+
+Wrap each paragraph with p tag.
+ie: <p> Insert paragraph here </p>
+
+Insert "align=left" inside img tag if you want the text around it to wrap around the image.
+ie: <img src="files/imagefile.gif" align="left" />
+
+Insert <br /> for linebreak
+
+ *******-->
+
+
+<h2>
+<img src="http://media.wwnorton.com/college/history/US History Tours/gearth_logo.jpg" /> Norton U.S. History Tour: World War II 1941-1945</h2>
+
+
+<p>
+World War II was a titanic and catastrophic struggle in which some 60 million people died. For Americans, however, it was the “good war,” one in which they struggled successfully to defend democracy and defeat the evils of Nazi Germany and Japan.</p>
+
+<p>
+This tour chronciles several battles, from Pearl Harbor to the bombing of Hiroshima. The sites include movie newsreels, maps, and other illustrations.
+</p>
+
+<h4>Answer <a href="http://www.wwnorton.com/college/history/america8/full/tours_questions/WWII.aspx"><u>Focus Questions</u></a> about this HistoryTour.</h4>
+
+<hr color="#482b1d" size="1" />
+
+<br /><br />
+<table width="500"><tr>
+<td  width="200">
+ <a href="http://nortonebooks.com/disciplines/discipline2.asp?Discid=11">
+<img src="http://media.wwnorton.com/college/history/US History Tours/ebook_sm.gif" /></a>
+ Access <em>America: A Narrative History</em> Ebook
+</td><td  width="200">
+<a href="http://www.wwnorton.com/studyspace/disciplines/history.asp">
+<img src="http://media.wwnorton.com/college/history/US History Tours/s_s.jpg" /></a> 
+Visit Norton History StudySpace</td></tr></table>
+
+<p align="center"><a href="http://www.wwnorton.com"> <font color="#666"> &copy; Copyright 2009 W.W. Norton &amp; Company</font></a></p>]]></description>
+		<GroundOverlay id="WorldWarIIPacificBattles">
+			<name>World War II Pacific Battles</name>
+			<description><![CDATA[<img src="http://media.wwnorton.com/college/history/US History Tours/norton_logo.jpg" />
+
+
+<hr color="#482b1d" size="1" />
+
+<table width="500">
+<tr><td>
+
+<!-- ******* Start - Insert Main Content  *******-->
+
+
+<!-- ******* 
+Note: 
+
+Wrap each paragraph with p tag.
+ie: <p> Insert paragraph here </p>
+
+Insert "align=left" inside img tag if you want the text around it to wrap around the image.
+ie: <img src="files/imagefile.gif" align="left" />
+
+Insert <br /> for linebreak
+
+ *******-->
+
+
+<h2>
+<img src="http://media.wwnorton.com/college/history/US History Tours/gearth_logo.jpg" />Norton U.S. History Tour:  World War II Pacific Battles</h2>
+
+
+
+<p>The United States, which had taken an isolationist position regarding world events in the 1930s, was pulled into the war in 1941 when the Japanese attacked Pearl Harbor, Hawaii.  For the next year the Americans had great difficulty fighting the Japanese, counting only a small victory in the Battle of Coral Sea.  In 1943, however, the United States Navy scored a tremendous victory at Midway.  From that point on the Americans pushed westward, forcing the Japanese back to their homelands.  This process, known as island hopping, often involved brutal fighting like that at Okinawa in 1945.  Americans feared that the planned invasion of the Japan would result in hundreds of thousands of casualties.  That invasion never took place, as the atomic bombs dropped on Hiroshima and Nagasaki led to a Japanese surrender.</p>
+
+Map Image
+Copyright W. W. Norton &amp; Company, Inc.
+</td></tr></table>
+
+<hr color="#482b1d" size="1" />
+
+<br /><br />
+<table width="500"><tr>
+<td  width="200">
+ <a href="http://nortonebooks.com/disciplines/discipline2.asp?Discid=11">
+<img src="http://media.wwnorton.com/college/history/US History Tours/ebook_sm.gif" /></a>
+ Access <em>America: A Narrative History</em> Ebook
+</td><td  width="200">
+<a href="http://www.wwnorton.com/studyspace/disciplines/history.asp">
+<img src="http://media.wwnorton.com/college/history/US History Tours/s_s.jpg" /></a> 
+Visit Norton History StudySpace</td></tr></table>
+
+<p align="center"><a href="http://www.wwnorton.com"> <font color="#666"> &copy; Copyright 2009 W.W. Norton &amp; Company</font></a></p>]]></description>
+			<Icon>
+				<href>http://media.wwnorton.com/college/history/US History Tours/WWII/map_22_01.jpg</href>
+				<viewBoundScale>0.75</viewBoundScale>
+			</Icon>
+			<LatLonBox>
+				<north>61.6585977241381</north>
+				<south>-26.7512555904163</south>
+				<east>224.0027074825389</east>
+				<west>83.55752499506841</west>
+				<rotation>-0.7446916832250821</rotation>
+			</LatLonBox>
+		</GroundOverlay>
+		<GroundOverlay id="WorldWarIIEuropeanBattles">
+			<name>World War II European Battles</name>
+			<description><![CDATA[<img src="http://media.wwnorton.com/college/history/US History Tours/norton_logo.jpg" />
+
+
+<hr color="#482b1d" size="1" />
+
+<table width="500">
+<tr><td>
+
+<!-- ******* Start - Insert Main Content  *******-->
+
+
+<!-- ******* 
+Note: 
+
+Wrap each paragraph with p tag.
+ie: <p> Insert paragraph here </p>
+
+Insert "align=left" inside img tag if you want the text around it to wrap around the image.
+ie: <img src="files/imagefile.gif" align="left" />
+
+Insert <br /> for linebreak
+
+ *******-->
+
+
+<h2>
+<img src="http://media.wwnorton.com/college/history/US History Tours/gearth_logo.jpg" /> Norton U.S. History Tour:World War II European Battles</h2>
+
+
+
+
+<p>Most Americans regard D-Day, the opening of the second front in northwestern France, as the major turning point in the war against Germany.  Military historians, however, point to battles on the eastern front such as Stalingrad and Kursk as being just as important as the Soviets defeated the Germans in massive and bloody engagements.  As the Russians forced the Germans to retreat to the west, the Americans and the British advanced toward the east.  The Battle of the Bulge was the last German counter-offensive, ending in failure for Hitler’s troops.  Germany surrendered four months later, bringing to an end the war in Europe.  </p>
+
+<p>Image Copyright: W. W. Norton &amp; Company, Inc.</p>
+
+<!-- ******* End - Insert Main Content  *******-->
+
+
+
+</td></tr></table>
+
+<hr color="#482b1d" size="1" />
+
+<br /><br />
+<table width="500"><tr>
+<td  width="200">
+ <a href="http://nortonebooks.com/disciplines/discipline2.asp?Discid=11">
+<img src="http://media.wwnorton.com/college/history/US History Tours/ebook_sm.gif" /></a>
+ Access <em>America: A Narrative History</em> Ebook
+</td><td  width="200">
+<a href="http://www.wwnorton.com/studyspace/disciplines/history.asp">
+<img src="http://media.wwnorton.com/college/history/US History Tours/s_s.jpg" /></a> 
+Visit Norton History StudySpace</td></tr></table>
+
+<p align="center"><a href="http://www.wwnorton.com"> <font color="#666"> &copy; Copyright 2009 W.W. Norton &amp; Company</font></a></p>]]></description>
+			<color>e3ffffff</color>
+			<Icon>
+				<href>http://media.wwnorton.com/college/history/US History Tours/WWII/map_22_02.jpg</href>
+				<viewBoundScale>0.5</viewBoundScale>
+			</Icon>
+			<LatLonBox>
+				<north>75.53643249981846</north>
+				<south>26.03343215586574</south>
+				<east>51.85806715932883</east>
+				<west>-17.0523194779714</west>
+				<rotation>18.25245283035577</rotation>
+			</LatLonBox>
+		</GroundOverlay>
+		<Placemark id="PearlHarborDecember71941">
+			<name>Pearl Harbor: December 7, 1941</name>
+			<description><![CDATA[<img src="http://media.wwnorton.com/college/history/US History Tours/norton_logo.jpg" />
+
+
+<hr color="#482b1d" size="1" />
+
+<table width="500">
+<tr><td>
+
+<!-- ******* Start - Insert Main Content  *******-->
+
+
+<!-- ******* 
+Note: 
+
+Wrap each paragraph with p tag.
+ie: <p> Insert paragraph here </p>
+
+Insert "align=left" inside img tag if you want the text around it to wrap around the image.
+ie: <img src="files/imagefile.gif" align="left" />
+
+Insert <br /> for linebreak
+
+ *******-->
+
+
+<h2>
+<img src="http://media.wwnorton.com/college/history/US History Tours/gearth_logo.jpg" /> Norton U.S. History Tour: Pearl Harbor: December 7, 1941</h2>
+
+<p>In November, 1941, the Japanese began to implement their plan to dominate the Asia and the western Pacific Ocean.  They viewed the presence of the American Pacific Fleet stationed at Pearl Harbor as a threat to their ability to control the region.  Believing that the destruction of the fleet would leave the United States unable to wage war for some time, the Japanese planned a secret attack on Pearl Harbor.</p>
+<p>
+	The Japanese Combined Fleet, which included six aircraft carriers, set sail in late November, following a route that made detection unlikely.  On December 7 it was 230 miles north of Oahu.  In the early morning hours the Japanese launched the first assault of 183 planes, including dive bombers and torpedo planes.  American radar picked up the invading force, which was mistakenly identified as a group of American planes.  Thus, the Americans were caught by surprise when the Japanese attack began.  The Americans lost 18 ships and 188 aircraft in less than three hours.</p>
+<p>
+	President Roosevelt denounced the attack, declaring that December 7 would be a “date which will live in infamy.”  Congress responded to the president’s call to arms, and the United States found itself fighting in World War II.</p>
+<p>
+
+<img src="http://media.wwnorton.com/college/history/US History Tours/WWII/pearl_harbor.jpg"></p>
+
+<p>
+
+Newsreel introduction of the official movie released by the United States Navy's account of the attack on Pearl Harbor, December 7th, 1941.</p>
+<p>
+<object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/EyjicU83-Zs&hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/EyjicU83-Zs&hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object></p>
+
+
+
+
+<hr color="#482b1d" size="1" />
+
+<br /><br />
+<table width="500"><tr>
+<td  width="200">
+ <a href="http://nortonebooks.com/disciplines/discipline2.asp?Discid=11">
+<img src="http://media.wwnorton.com/college/history/US History Tours/ebook_sm.gif" /></a>
+ Access <em>America: A Narrative History</em> Ebook
+</td><td  width="200">
+<a href="http://www.wwnorton.com/studyspace/disciplines/history.asp">
+<img src="http://media.wwnorton.com/college/history/US History Tours/s_s.jpg" /></a> 
+Visit Norton History StudySpace</td></tr></table>
+
+<p align="center"><a href="http://www.wwnorton.com"> <font color="#666"> &copy; Copyright 2009 W.W. Norton &amp; Company</font></a></p>]]></description>
+			<LookAt>
+				<longitude>-157.9479245563802</longitude>
+				<latitude>21.35827356707959</latitude>
+				<altitude>0</altitude>
+				<heading>0.001936669406514919</heading>
+				<tilt>0</tilt>
+				<range>3128.660592216345</range>
+				<altitudeMode>relativeToGround</altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin140</styleUrl>
+			<Point>
+				<coordinates>-157.9503525957017,21.3609610171904,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="TheBattlefortheCoralSea">
+			<name>The Battle for the Coral Sea</name>
+			<description><![CDATA[<img src="http://media.wwnorton.com/college/history/US History Tours/norton_logo.jpg" />
+
+
+<hr color="#482b1d" size="1" />
+
+<table width="500">
+<tr><td>
+
+<!-- ******* Start - Insert Main Content  *******-->
+
+
+<!-- ******* 
+Note: 
+
+Wrap each paragraph with p tag.
+ie: <p> Insert paragraph here </p>
+
+Insert "align=left" inside img tag if you want the text around it to wrap around the image.
+ie: <img src="files/imagefile.gif" align="left" />
+
+Insert <br /> for linebreak
+
+ *******-->
+
+<h2>
+<img src="http://media.wwnorton.com/college/history/US History Tours/gearth_logo.jpg" />
+Norton U.S. History Tour: The Battle for the Coral Sea </h2>
+
+ 
+ <h3>
+ Port Moresby, New Guinea
+</h3>
+<p>
+In 1942 the Japanese tried to expand the area that they controlled by taking Port Moresby, New Guinea.  Doing so would allow them to bomb Australia.  The Japanese invasion force included three aircraft carriers; the United States dispatched two carriers, the Yorktown and the Lexington to stop the Japanese.  During the ensuing battle, the naval forces of the two enemies, which were located 175 miles apart, never saw one another.  </p>
+<p>
+The carriers sent their planes to attack.  The Japanese lost one carrier, with the other two sustaining damage.  The Lexington was set ablaze and abandoned, while the Yorktown suffered light damage.  The Japanese withdrew, failing to take Port Moresby.  While not a total victory for the United States, the Battle of the Coral Sea proved that the U.S. Navy could effectively fight the Japanese on the high seas.  In addition, it reduced the threat of the Japanese attacking Australia.</p>
+<p>
+<img src="http://media.wwnorton.com/college/history/US History Tours/WWII/coral_sea.jpg" /></p>
+<p>
+Image compliments of US Naval History and Heritage Command</p>
+
+
+<br /><br />
+<table width="500"><tr>
+<td  width="200">
+ <a href="http://nortonebooks.com/disciplines/discipline2.asp?Discid=11">
+<img src="http://media.wwnorton.com/college/history/US History Tours/ebook_sm.gif" /></a>
+ Access <em>America: A Narrative History</em> Ebook
+</td><td  width="200">
+<a href="http://www.wwnorton.com/studyspace/disciplines/history.asp">
+<img src="http://media.wwnorton.com/college/history/US History Tours/s_s.jpg" /></a> 
+Visit Norton History StudySpace</td></tr></table>
+
+<p align="center"><a href="http://www.wwnorton.com"> <font color="#666"> &copy; Copyright 2009 W.W. Norton &amp; Company</font></a></p>]]></description>
+			<LookAt>
+				<longitude>147.1651165</longitude>
+				<latitude>-9.444897500000002</latitude>
+				<altitude>0</altitude>
+				<heading>-9.54166404439055e-15</heading>
+				<tilt>0</tilt>
+				<range>54616.45470931524</range>
+				<altitudeMode>relativeToGround</altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin8</styleUrl>
+			<Point>
+				<coordinates>147.1465633924919,-9.520946194281686,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="TheBattleofMidway">
+			<name>The Battle of Midway</name>
+			<description><![CDATA[<img src="http://media.wwnorton.com/college/history/US History Tours/norton_logo.jpg" />
+
+
+<hr color="#482b1d" size="1" />
+
+<table width="500">
+<tr><td>
+
+<!-- ******* Start - Insert Main Content  *******-->
+
+
+<!-- ******* 
+Note: 
+
+Wrap each paragraph with p tag.
+ie: <p> Insert paragraph here </p>
+
+Insert "align=left" inside img tag if you want the text around it to wrap around the image.
+ie: <img src="files/imagefile.gif" align="left" />
+
+Insert <br /> for linebreak
+
+ *******-->
+
+<h2>
+<img src="http://media.wwnorton.com/college/history/US History Tours/gearth_logo.jpg" />
+Norton U.S. History Tour: The Battle of Midway</h2>
+<p>
+In the spring of 1943 Admiral Isoroku Yamamoto, head of the Japanese Combined Fleet, sought to deal a final blow to American naval forces.  He planned to draw the U.S. Pacific Fleet to the Aleutian Islands as a diversion, allowing him to attack the American outpost on Midway Island.  He believed that the remainder of the U.S. fleet would hurry to Midway, where the Japanese forces would crush them.  The tiny outpost could then be used as a base of operations for attacking Hawaii and establishing a defense perimeter for the Japanese.  The Americans, however, learned of the pending attack on Midway because they had decoded Japanese messages.  They reinforced their position at Midway and assembled a fleet that included three aircraft carriers.  When the Japanese began their attack on the island, they had no idea that the U.S. fleet was nearby.  </p>
+<p>
+The Japanese attack commenced at dawn on June 4, 1943.  Defenders at Midway suffered heavy losses but were able to repel the attack.  As the Japanese prepared for a second raid on the island, American torpedo planes attacked their fleet.  They were followed by dive bombers which inflicted heavy losses on the Japanese, destroying three aircraft carriers and seriously damaging a fourth (which was later scuttled).  The Japanese had little choice but to withdraw from Midway.</p>
+<p>
+The Japanese defeat marked a turning point in the Pacific Theater.  Prior to Midway, the Americans could not claim any significant naval victories.  At Midway they were wildly successful, launching devastating attacks on the Japanese fleet.  From that point on the Americans would make their way ever closer to the Japanese home islands. </p>
+<p>
+How did events at Midway differ from Pearl Harbor?</p>
+<p>&nbsp;</p>
+<h3>United States Navy Video describing the battle.</h3></p>
+<h3>
+Part I (excerpt)</h3>
+<p>
+<object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/y3VeEbTPmzo&hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/y3VeEbTPmzo&hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object></p>
+<h3>
+Part II (excerpt)
+</h3><p>
+<object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/mDQK-Nm6oRQ&hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/mDQK-Nm6oRQ&hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object></p>
+<hr color="#482b1d" size=1 />
+
+</td></tr>
+</table>
+
+<br /><br />
+<table width="500"><tr>
+<td  width="200">
+ <a href="http://nortonebooks.com/disciplines/discipline2.asp?Discid=11">
+<img src="http://media.wwnorton.com/college/history/US History Tours/ebook_sm.gif" /></a>
+ Access <em>America: A Narrative History</em> Ebook
+</td><td  width="200">
+<a href="http://www.wwnorton.com/studyspace/disciplines/history.asp">
+<img src="http://media.wwnorton.com/college/history/US History Tours/s_s.jpg" /></a> 
+Visit Norton History StudySpace</td></tr></table>
+
+<p align="center"><a href="http://www.wwnorton.com"> <font color="#666"> &copy; Copyright 2009 W.W. Norton &amp; Company</font></a></p>]]></description>
+			<LookAt>
+				<longitude>-177.3821263388927</longitude>
+				<latitude>28.2627371752881</latitude>
+				<altitude>0</altitude>
+				<heading>-0.3392988853790948</heading>
+				<tilt>63.80106905605864</tilt>
+				<range>19665.10916782599</range>
+				<altitudeMode>relativeToGround</altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin46112</styleUrl>
+			<Point>
+				<coordinates>-177.3549639618537,28.20262167618143,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="TheBattleofStalingradJuly1942toFebruary1943">
+			<name>The Battle of Stalingrad, July 1942 to February 1943</name>
+			<description><![CDATA[<img src="http://media.wwnorton.com/college/history/US History Tours/norton_logo.jpg" />
+
+
+<hr color="#482b1d" size="1" />
+
+<table width="500">
+<tr><td>
+
+<!-- ******* Start - Insert Main Content  *******-->
+
+
+<!-- ******* 
+Note: 
+
+Wrap each paragraph with p tag.
+ie: <p> Insert paragraph here </p>
+
+Insert "align=left" inside img tag if you want the text around it to wrap around the image.
+ie: <img src="files/imagefile.gif" align="left" />
+
+Insert <br /> for linebreak
+
+ *******-->
+
+<h2>
+<img src="http://media.wwnorton.com/college/history/US History Tours/gearth_logo.jpg" />
+Norton U.S. History Tour: The Battle of Stalingrad, July 1942 to February 1943 </h2>
+<p>
+German armies invaded the Soviet Union in June, 1941.  In 1942 Hitler ordered a major offensive in the south, a region rich in natural resources.  A German victory would cripple the ability of the Soviet Union to wage war.  The offensive began in May and by September had reached the city of Stalingrad on the Volga River.  Soviet leader Josef Stalin ordered the city fortified and held at all costs; Hitler commanded that there would be no retreat.</p>
+<p>
+What followed was an epic battle that changed the course of the war.  The house-to house fighting destroyed much of Stalingrad.  The Soviets launched a counter-offensive that eventually encircled the German army.  </p>
+<p>
+Hitler refused to accept defeat, ordering his generals to continue fight.  By January, the Germans were running out of ammunition and had no choice but to surrender. </p>
+<p>
+<object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/c2mH8Kd2-0k&hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/c2mH8Kd2-0k&hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object></p>
+<p>
+(Excerpt from WHY WE FIGHT, a US War Department Film directed by Frank Capra. Part 1 of 2)</p>
+<p>
+<object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/F237CJgpj4E&hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/F237CJgpj4E&hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object></p>
+<p>
+(Excerpt from WHY WE FIGHT, a US War Department Film directed by Frank Capra. Part 2 of 2)</p>
+<p>
+<b>The Russian Ultimatum to the encircled German 6th Army<br> 
+Date: January 8, 1943:</p>
+<p>
+The Sixth Army, formations of the Fourth Panzer Army, and those units sent to reinforce them have been completely encircled since the 23rd of November, 1942.</p>
+<p>
+The soldiers of the Red Army have sealed this German Army Group within an unbreakable ring. All hopes of the rescue of your troops by a German offensive from the south or south-west have proved vain. The German units hastening to your assistance were defeated by the Red Army, and the remnants are now redrawing to Rostow.</p>
+<p>
+The German air transport fleet, which brought you a starvation ration of food, munitions and fuel has been controlled by the Red Army’s successful and rapid advance repeatedly to withdraw to airfields more distant from the encircled troops. It should be added that the German air transport fleet is suffering enormous losses in machines and crews at the hands of the Russian Airforce. The help they can bring to the besieged forces is rapidly becoming illusory.</p>
+<p>
+The situation of your troops is desperate. They are suffering from hunger, sickness and cold. The cruel Russian winter has scarcely yet begun. Hard frosts, cold winds and blizzards still lie ahead. Your soldiers are unprovided with winter clothing and are living in appalling sanitary conditions.</p>
+<p>
+You, as Commander in Chief, and all the officers of the encircled forces know well that there is for you no real possibility of breaking out. Your situation is hopeless, and any further resistance senseless.</p>
+<p>
+In view of the desperate situation in which you are placed, and in order to save unnecessary bloodshed, we propose that you except the following terms of surrender:</p>
+<p>
+1) All the encircled German troops, headed by yourself and your staff, shall cease to resist.</p>
+<p>
+2) You will hand over to such persons as shall be authorised by us, all members of your armed forces, all war materials and all army equipment in an undamaged condition.</p>
+<p>
+3) We guarantee the safety of all officers and men who cease to resist, and their return after the end of the war to Germany or to any other country to which these prisoners of war may wish to go.
+</p><p>
+4) All personnel of units which surrender may retain their military uniforms, badges of rank, decorations, personal belongings and valuables and, in case of high ranking officers their swords.</p>
+<p>
+5) All officers, non-commissioned officers and men who surrender will immediately receive normal rations.</p>
+<p>
+6) All those are wounded, sick or frost-bitten will be given medical treatment.</p>
+<p>
+Your reply is to be given in writing by ten o’clock, Moscow time the 9th of January 1943. It must be delivered by your personal representative, who is to travel in a car bearing a white flag along the road that leads to the Konny siding at Kotlubanj station. Your representative will be met by fully authorised Russian officers in District B, 500 metres south-east of siding 564 at 10.00hrs. on the 9th of January, 1943. Should you refuse our offer that you lay down in your arms, we hereby give you notice that the forces of the Red Army and the Red Airforce will be compelled to proceed with the destruction of the encircled German troops. The responsibility for this will lie with you.</p>
+<p>
+The Soviets took 110,000 German soldiers as prisoners-of-war.  The Soviet victory at Stalingrad marked a major turning point on the Eastern Front.  The Germans never won another major battle there, and for the next two years the Soviets pushed the Germans back, reoccupying those regions that the Germans had captured.</p>
+
+
+</td></tr></table>
+<hr color="#482b1d" size=1 />
+
+<br /><br />
+<table width="500"><tr>
+<td  width="200">
+ <a href="http://nortonebooks.com/disciplines/discipline2.asp?Discid=11">
+<img src="http://media.wwnorton.com/college/history/US History Tours/ebook_sm.gif" /></a>
+ Access <em>America: A Narrative History</em> Ebook
+</td><td  width="200">
+<a href="http://www.wwnorton.com/studyspace/disciplines/history.asp">
+<img src="http://media.wwnorton.com/college/history/US History Tours/s_s.jpg" /></a> 
+Visit Norton History StudySpace</td></tr></table>
+
+<p align="center"><a href="http://www.wwnorton.com"> <font color="#666"> &copy; Copyright 2009 W.W. Norton &amp; Company</font></a></p>]]></description>
+			<LookAt>
+				<longitude>44.55932434141948</longitude>
+				<latitude>48.72666538866532</latitude>
+				<altitude>0</altitude>
+				<heading>0.04109626508869194</heading>
+				<tilt>0</tilt>
+				<range>34016.59390139985</range>
+				<altitudeMode>relativeToGround</altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin130</styleUrl>
+			<Point>
+				<coordinates>44.61556568220771,48.76971630940137,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="BattleofLeyteGulfOctober231942">
+			<name>Battle of Leyte Gulf, October 23, 1942</name>
+			<description><![CDATA[<img src="http://media.wwnorton.com/college/history/US History Tours/norton_logo.jpg" />
+
+
+<hr color="#482b1d" size="1" />
+
+<table width="500">
+<tr><td>
+
+<!-- ******* Start - Insert Main Content  *******-->
+
+
+<!-- ******* 
+Note: 
+
+Wrap each paragraph with p tag.
+ie: <p> Insert paragraph here </p>
+
+Insert "align=left" inside img tag if you want the text around it to wrap around the image.
+ie: <img src="files/imagefile.gif" align="left" />
+
+Insert <br /> for linebreak
+
+ *******-->
+
+<h2>
+<img src="http://media.wwnorton.com/college/history/US History Tours/gearth_logo.jpg" />
+Norton U.S. History Tour: Battle of Leyte Gulf, October 23, 1942 </h2>
+<p>
+Occupation of the Philippine islands provided the Japanese with a supply route for resources such as oil imported to Japan from the Dutch East Indies.  In October 1944 the Americans sought to retake the Philippines, which had fallen to the Japanese in 1942.  On October 20, General Douglas MacArthur strode ashore on the island of Leyte, a moment immortalized in a famous photograph.  </p>
+<p>
+<img src="http://media.wwnorton.com/college/history/US History Tours/WWII/macarthur_leyte.jpg"></p>
+<p>
+The battle that began at sea three days later remains the largest naval engagement in history.  The Americans were victorious, destroying much of the Japanese navy and rendering it so weakened that the Americans now dominated the Pacific.  </p>
+<p>
+<object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/lSF90_oZBTA&hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/lSF90_oZBTA&hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object></p>
+<p>
+(Excerpt from <b>Victory at Sea</b> episode about the Battle of Leyte, part 1 of 2)
+<p>
+<object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/Z-8vJconuw8&hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/Z-8vJconuw8&hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object></p>
+<p>
+(Excerpt from <b>Victory at Sea</b> episode about the Battle of Leyte, part 2 of 2)</p>
+<p>
+The battle opened the way for the Americans to retake the Philippines, cutting the Japanese off from precious supplies.  The battle was also notable because it marked the first time that the Japanese used kamikaze pilots in battle. </p>
+
+</td></tr></table>
+<hr color="#482b1d" size=1 />
+
+<br /><br />
+<table width="500"><tr>
+<td  width="200">
+ <a href="http://nortonebooks.com/disciplines/discipline2.asp?Discid=11">
+<img src="http://media.wwnorton.com/college/history/US History Tours/ebook_sm.gif" /></a>
+ Access <em>America: A Narrative History</em> Ebook
+</td><td  width="200">
+<a href="http://www.wwnorton.com/studyspace/disciplines/history.asp">
+<img src="http://media.wwnorton.com/college/history/US History Tours/s_s.jpg" /></a> 
+Visit Norton History StudySpace</td></tr></table>
+
+<p align="center"><a href="http://www.wwnorton.com"> <font color="#666"> &copy; Copyright 2009 W.W. Norton &amp; Company</font></a></p>]]></description>
+			<LookAt>
+				<longitude>125.7363018677215</longitude>
+				<latitude>12.59840791606942</latitude>
+				<altitude>0</altitude>
+				<heading>-28.8335257302137</heading>
+				<tilt>4.70583428924631e-05</tilt>
+				<range>2036789.259118723</range>
+				<altitudeMode>relativeToGround</altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin11</styleUrl>
+			<Point>
+				<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+				<coordinates>126.2895085972658,10.72281238340279,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="TheBattleofKurskJuly1943">
+			<name>The Battle of Kursk, July 1943</name>
+			<description><![CDATA[<img src="http://media.wwnorton.com/college/history/US History Tours/norton_logo.jpg" />
+
+
+<hr color="#482b1d" size="1" />
+
+<table width="500">
+<tr><td>
+
+<!-- ******* Start - Insert Main Content  *******-->
+
+
+<!-- ******* 
+Note: 
+
+Wrap each paragraph with p tag.
+ie: <p> Insert paragraph here </p>
+
+Insert "align=left" inside img tag if you want the text around it to wrap around the image.
+ie: <img src="files/imagefile.gif" align="left" />
+
+Insert <br /> for linebreak
+
+ *******-->
+
+<h2>
+<img src="http://media.wwnorton.com/college/history/US History Tours/gearth_logo.jpg" />
+Norton U.S. History Tour: The Battle of Kursk, July 1943</h2>
+<p>
+In 1943, after the shattering defeat at Stalingrad, the Germans renewed their offensive into the Soviet Union.  They sought to push the Soviets back east of the city of Kursk, a major railroad terminal.  The battle began in July 5, 1943, and lasted a little over a week.  A total of 4 million men and 13,000 armored vehicles fought at Kursk.  The largest tank battle of the war, Kursk ended with a Soviet victory.</p>
+<p>
+<img src="http://media.wwnorton.com/college/history/US History Tours/WWII/Soviet_tank_battle_of_kursk.jpg"></p>
+<p>
+Evacuation of a damaged vehicle, being towed by a T-34, under enemy fire. Kursk. July 1943.
+RGAKFD (Russian Archives)
+</p>
+</td></tr></table>
+<hr color="#482b1d" size=1 />
+
+<br /><br />
+<table width="500"><tr>
+<td  width="200">
+ <a href="http://nortonebooks.com/disciplines/discipline2.asp?Discid=11">
+<img src="http://media.wwnorton.com/college/history/US History Tours/ebook_sm.gif" /></a>
+ Access <em>America: A Narrative History</em> Ebook
+</td><td  width="200">
+<a href="http://www.wwnorton.com/studyspace/disciplines/history.asp">
+<img src="http://media.wwnorton.com/college/history/US History Tours/s_s.jpg" /></a> 
+Visit Norton History StudySpace</td></tr></table>
+
+<p align="center"><a href="http://www.wwnorton.com"> <font color="#666"> &copy; Copyright 2009 W.W. Norton &amp; Company</font></a></p>]]></description>
+			<LookAt>
+				<longitude>36.19876021281343</longitude>
+				<latitude>51.74133907764819</latitude>
+				<altitude>0</altitude>
+				<heading>0.01088993491734612</heading>
+				<tilt>5.896156467561139</tilt>
+				<range>7602.857246479678</range>
+				<altitudeMode>relativeToGround</altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin_copy:0_copy4313111</styleUrl>
+			<Point>
+				<coordinates>36.20340434732203,51.74027967212846,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="DDayJune61944">
+			<name>D-Day, June 6, 1944</name>
+			<description><![CDATA[<img src="http://media.wwnorton.com/college/history/US History Tours/norton_logo.jpg" />
+
+
+<hr color="#482b1d" size="1" />
+
+<table width="500">
+<tr><td>
+
+<!-- ******* Start - Insert Main Content  *******-->
+
+
+<!-- ******* 
+Note: 
+
+Wrap each paragraph with p tag.
+ie: <p> Insert paragraph here </p>
+
+Insert "align=left" inside img tag if you want the text around it to wrap around the image.
+ie: <img src="files/imagefile.gif" align="left" />
+
+Insert <br /> for linebreak
+
+ *******-->
+
+<h2>
+<img src="http://media.wwnorton.com/college/history/US History Tours/gearth_logo.jpg" />
+Norton U.S. History Tour: D-Day, June 6, 1944 </h2>
+<p>
+<img src="http://media.wwnorton.com/college/history/US History Tours/WWII/jaws_of_death.jpg"></p>
+<p>
+("Into the Jaws of Death - U.S. Troops wading through water and Nazi gunfire" [National Archives]</p>
+<p>
+D-Day, June 6, 1944, marked the opening of a second front in the battle for Europe.  In the early morning hours of that day, some 200,000 troops landed in Normandy in northwestern France.  The weather the previous day had been stormy, lulling the Germans into believing that no invasion was imminent.  Nonetheless, the Allied troops met with resistance as they arrived ashore—the day the Americans suffered some 4600 casualties.  In the days that followed, one million Allied troops landed on the beaches at Normandy.  The second front had been opened, and the Allies would begin their drive east to defeat Germany.  </p>
+<p>
+<object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/Wzo9c64x6Do&hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/Wzo9c64x6Do&hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object></p>
+<p>
+United News Movie
+</p>
+</td></tr></table>
+<br /><br />
+<table width="500"><tr>
+<td  width="200">
+ <a href="http://nortonebooks.com/disciplines/discipline2.asp?Discid=11">
+<img src="http://media.wwnorton.com/college/history/US History Tours/ebook_sm.gif" /></a>
+ Access <em>America: A Narrative History</em> Ebook
+</td><td  width="200">
+<a href="http://www.wwnorton.com/studyspace/disciplines/history.asp">
+<img src="http://media.wwnorton.com/college/history/US History Tours/s_s.jpg" /></a> 
+Visit Norton History StudySpace</td></tr></table>
+
+<p align="center"><a href="http://www.wwnorton.com"> <font color="#666"> &copy; Copyright 2009 W.W. Norton &amp; Company</font></a></p>]]></description>
+			<LookAt>
+				<longitude>-0.8595704351511768</longitude>
+				<latitude>49.43965628109729</latitude>
+				<altitude>0</altitude>
+				<heading>0.1732176546428714</heading>
+				<tilt>0</tilt>
+				<range>367991.1073163978</range>
+				<altitudeMode>relativeToGround</altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin320</styleUrl>
+			<Point>
+				<coordinates>-0.6520167706116742,49.45832731490652,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="TheBattleoftheBulgeBelgiumWinter1945">
+			<name>The Battle of the Bulge, Belgium, Winter 1945</name>
+			<description><![CDATA[<img src="http://media.wwnorton.com/college/history/US History Tours/norton_logo.jpg" />
+
+
+<hr color="#482b1d" size="1" />
+
+<table width="500">
+<tr><td>
+
+<!-- ******* Start - Insert Main Content  *******-->
+
+
+<!-- ******* 
+Note: 
+
+Wrap each paragraph with p tag.
+ie: <p> Insert paragraph here </p>
+
+Insert "align=left" inside img tag if you want the text around it to wrap around the image.
+ie: <img src="files/imagefile.gif" align="left" />
+
+Insert <br /> for linebreak
+
+ *******-->
+
+<h2>
+<img src="http://media.wwnorton.com/college/history/US History Tours/gearth_logo.jpg" />
+Norton U.S. History Tour: The Battle of the Bulge, Belgium, Winter 1945 </h2>
+
+<p>
+<img src="http://media.wwnorton.com/college/history/US History Tours/WWII/bbulge.jpg"></p>
+<p>
+[Troops of the United States 7th Armored Division advance along a road towards St. Vith in Belgium, retaken in the final liquidation of the Battle of the Belgian Bulge., 02/09/1945
+ARC Identifier 196312]</p>
+<p>
+By late autumn, 1944, the Allies had moved into the Low Countries of Belgium and the Netherlands.  On December 16, the Germans launched a counter-offensive, pushing the Allies back into the Ardennes Forest, site of a World War I battle.  This attack created a bulge in the line of the western front, giving the battle its name.  It lasted into January, 1945.  Although successful, the Americans suffered 70,000 casualties, including 19,000 dead, and the Germans had 100,000 casualties, making the Battle of the Bulge the most deadly conflict of the war.  The battle left the German army severely weakened as the Allies moved advanced toward Germany.</p>
+<p>
+<object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/ph8r8ZcKV1s&hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/ph8r8ZcKV1s&hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object></p>
+<p>
+[January 11, 1945.  United Pictures Newsreel about the final days of the Battle of the Bulge in the Ardennes Forest and Bastogne in Belgium.]  </p></td></tr></table>
+<hr color="#482b1d" size=1 />
+
+<br /><br />
+<table width="500"><tr>
+<td  width="200">
+ <a href="http://nortonebooks.com/disciplines/discipline2.asp?Discid=11">
+<img src="http://media.wwnorton.com/college/history/US History Tours/ebook_sm.gif" /></a>
+ Access <em>America: A Narrative History</em> Ebook
+</td><td  width="200">
+<a href="http://www.wwnorton.com/studyspace/disciplines/history.asp">
+<img src="http://media.wwnorton.com/college/history/US History Tours/s_s.jpg" /></a> 
+Visit Norton History StudySpace</td></tr></table>
+
+<p align="center"><a href="http://www.wwnorton.com"> <font color="#666"> &copy; Copyright 2009 W.W. Norton &amp; Company</font></a></p>]]></description>
+			<LookAt>
+				<longitude>5.660447025768931</longitude>
+				<latitude>50.06211272995069</latitude>
+				<altitude>0</altitude>
+				<heading>-12.158939485109</heading>
+				<tilt>0</tilt>
+				<range>25108.37085316706</range>
+				<altitudeMode>relativeToGround</altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin_copy:0_copy501112</styleUrl>
+			<Point>
+				<coordinates>5.711454236354734,50.00354922473058,0</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="BattleofOkinawaMarchthroughJune1945">
+			<name>Battle of Okinawa, March through June, 1945</name>
+			<description><![CDATA[<img src="http://media.wwnorton.com/college/history/US History Tours/norton_logo.jpg" />
+
+
+<hr color="#482b1d" size="1" />
+
+<table width="500">
+<tr><td>
+
+<!-- ******* Start - Insert Main Content  *******-->
+
+
+<!-- ******* 
+Note: 
+
+Wrap each paragraph with p tag.
+ie: <p> Insert paragraph here </p>
+
+Insert "align=left" inside img tag if you want the text around it to wrap around the image.
+ie: <img src="files/imagefile.gif" align="left" />
+
+Insert <br /> for linebreak
+
+ *******-->
+
+<h2>
+<img src="http://media.wwnorton.com/college/history/US History Tours/gearth_logo.jpg" />
+Norton U.S. History Tour: Battle of Okinawa, March through June, 1945 </h2>
+<p>
+The island of Okinawa lies some 350 miles southwest of the Japanese home islands and would serve as a useful base for launching air raids and preparing for the final assault on Japan.  The Japanese had some 120,000 defenders on Okinawa.  American forces included some 1300 ships and nearly a quarter million men.   The Americans first bombarded the island for a week, after which American forces landed on its beaches.  </p>
+<p>
+<img src="http://media.wwnorton.com/college/history/US History Tours/WWII/okinawa_beachhead.jpg"></p>
+<p>
+[A formidable task force carves out a beachhead, about 350 miles from the Japanese mainland. Landing craft of all kinds blacken the sea out to the horizon, where stand the battlewagons, cruisers and destroyers. Okinawa, April 13, 1945., ca. 1915 - 1967
+ARC Identifier 513221 / Local Identifier 26-G-4426]</p>
+<p>
+At first they met no resistance, as the Japanese planned to lure the invaders inland.  Within days, however, some of the most savage fighting of World War II began.  The human cost was tremendous.  The Americans lost some 7,600 soldiers and 4,900 sailors.  The Japanese sank 38 American ships, damaged another 368 ships, and destroyed 763 aircraft.  The death toll for the Japanese was staggering—of the 120,000 defenders, only 7,000 survived.  Thousands committed suicide rather than be taken prisoner of war.  Okinawa’s civilian population suffered as well, with perhaps as many as 160,000 dead. </p>
+<p>
+<img src="http://media.wwnorton.com/college/history/US History Tours/WWII/okinawa_marine.jpg"></p>
+<p>
+[Photograph of a Marine Charging Japanese Machine Guns on Okinawa, 05/10/1945
+ARC Identifier 532554 / Local Identifier War and Conflict 1229]</p>
+<p>
+The American victory on Okinawa raised serious concerns about the planned invasion of the Japanese home islands.  If the Americans suffered a casualty rate of 35 percent on Okinawa, an island only eighty miles long, how many would die in the effort to conquer Japan?  Estimates ran as high as a quarter million killed or injured.  This sobering figure contributed to the American willingness to use atomic weapons against Japan after the successful test in July, 1945.</p>
+<p>
+<object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/I0vIYX6weCU&hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/I0vIYX6weCU&hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object></p>
+<p>
+[Universal Newsreel, a brief overview US-Japanese struggle for Okinawa.  April 1945]</p>
+
+</td></tr></table>
+<br /><br /><hr color="#482b1d" size=1 />
+<table width="500"><tr>
+<td  width="200">
+ <a href="http://nortonebooks.com/disciplines/discipline2.asp?Discid=11">
+<img src="http://media.wwnorton.com/college/history/US History Tours/ebook_sm.gif" /></a>
+ Access <em>America: A Narrative History</em> Ebook
+</td><td  width="200">
+<a href="http://www.wwnorton.com/studyspace/disciplines/history.asp">
+<img src="http://media.wwnorton.com/college/history/US History Tours/s_s.jpg" /></a> 
+Visit Norton History StudySpace</td></tr></table>
+
+<p align="center"><a href="http://www.wwnorton.com"> <font color="#666"> &copy; Copyright 2009 W.W. Norton &amp; Company</font></a></p>]]></description>
+			<LookAt>
+				<longitude>127.680932</longitude>
+				<latitude>26.212401</latitude>
+				<altitude>0</altitude>
+				<heading>-4.770832022195275e-15</heading>
+				<tilt>0</tilt>
+				<range>1344780.499999999</range>
+				<altitudeMode>relativeToGround</altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin50</styleUrl>
+			<Point>
+				<coordinates>127.680932,26.212401,0</coordinates>
+			</Point>
+		</Placemark>
+		<GroundOverlay id="HiroshimaPreABombAttack">
+			<name>Hiroshima, Pre-A-Bomb Attack</name>
+			<description><![CDATA[<img src="http://media.wwnorton.com/college/history/US History Tours/norton_logo.jpg" />
+
+
+<hr color="#482b1d" size="1" />
+
+<table width="500">
+<tr><td>
+
+<!-- ******* Start - Insert Main Content  *******-->
+
+
+<!-- ******* 
+Note: 
+
+Wrap each paragraph with p tag.
+ie: <p> Insert paragraph here </p>
+
+Insert "align=left" inside img tag if you want the text around it to wrap around the image.
+ie: <img src="files/imagefile.gif" align="left" />
+
+Insert <br /> for linebreak
+
+ *******-->
+
+<h2>
+<img src="http://media.wwnorton.com/college/history/US History Tours/gearth_logo.jpg" />
+Norton U.S. History Tour: Hiroshima, Pre-A-Bomb Attack</h2>
+[Pre-attack mosaic view of Hiroshima, Japan.], 04/13/1945
+ARC Identifier 540225 / Local Identifier 243-HP-1(3)<hr color="#482b1d" size=1 />
+
+<br /><br />
+<table width="500"><tr>
+<td  width="200">
+ <a href="http://nortonebooks.com/disciplines/discipline2.asp?Discid=11">
+<img src="http://media.wwnorton.com/college/history/US History Tours/ebook_sm.gif" /></a>
+ Access <em>America: A Narrative History</em> Ebook
+</td><td  width="200">
+<a href="http://www.wwnorton.com/studyspace/disciplines/history.asp">
+<img src="http://media.wwnorton.com/college/history/US History Tours/s_s.jpg" /></a> 
+Visit Norton History StudySpace</td></tr></table>
+
+<p align="center"><a href="http://www.wwnorton.com"> <font color="#666"> &copy; Copyright 2009 W.W. Norton &amp; Company</font></a></p>]]></description>
+			<Icon>
+				<href>http://media.wwnorton.com/college/history/US History Tours/WWII/hiroshima_pre-attack.gif</href>
+				<viewBoundScale>0.75</viewBoundScale>
+			</Icon>
+			<LatLonBox>
+				<north>34.42198009061087</north>
+				<south>34.34973899196966</south>
+				<east>132.5184169259426</east>
+				<west>132.3775703452841</west>
+				<rotation>19.66401729027104</rotation>
+			</LatLonBox>
+		</GroundOverlay>
+		<GroundOverlay id="HiroshimaPostABombAttack">
+			<name>Hiroshima, Post-A-Bomb Attack</name>
+			<description><![CDATA[<img src="http://media.wwnorton.com/college/history/US History Tours/norton_logo.jpg" />
+
+
+<hr color="#482b1d" size="1" />
+
+<table width="500">
+<tr><td>
+
+<!-- ******* Start - Insert Main Content  *******-->
+
+
+<!-- ******* 
+Note: 
+
+Wrap each paragraph with p tag.
+ie: <p> Insert paragraph here </p>
+
+Insert "align=left" inside img tag if you want the text around it to wrap around the image.
+ie: <img src="files/imagefile.gif" align="left" />
+
+Insert <br /> for linebreak
+
+ *******-->
+
+<h2>
+<img src="http://media.wwnorton.com/college/history/US History Tours/gearth_logo.jpg" />
+Norton U.S. History Tour: Hiroshima, Post-A-Bomb Attack</h2>
+
+
+
+[Post-attack mosaic view of Hiroshima, Japan.], 08/11/1945
+ARC Identifier 540226 / Local Identifier 243-HP-1(4)<hr color="#482b1d" size=1 />
+
+<br /><br />
+<table width="500"><tr>
+<td  width="200">
+ <a href="http://nortonebooks.com/disciplines/discipline2.asp?Discid=11">
+<img src="http://media.wwnorton.com/college/history/US History Tours/ebook_sm.gif" /></a>
+ Access <em>America: A Narrative History</em> Ebook
+</td><td  width="200">
+<a href="http://www.wwnorton.com/studyspace/disciplines/history.asp">
+<img src="http://media.wwnorton.com/college/history/US History Tours/s_s.jpg" /></a> 
+Visit Norton History StudySpace</td></tr></table>
+
+<p align="center"><a href="http://www.wwnorton.com"> <font color="#666"> &copy; Copyright 2009 W.W. Norton &amp; Company</font></a></p>]]></description>
+			<Icon>
+				<href>http://media.wwnorton.com/college/history/US History Tours/WWII/hiroshima_post-attack.gif</href>
+				<viewBoundScale>0.75</viewBoundScale>
+			</Icon>
+			<LatLonBox>
+				<north>34.42148163299196</north>
+				<south>34.34730350324227</south>
+				<east>132.5183125090524</east>
+				<west>132.3779939648223</west>
+				<rotation>19.45603973759144</rotation>
+			</LatLonBox>
+		</GroundOverlay>
+		<Placemark id="HiroshimaJapanAugust61945">
+			<name>Hiroshima, Japan, August 6, 1945</name>
+			<description><![CDATA[<img src="http://media.wwnorton.com/college/history/US History Tours/norton_logo.jpg" />
+
+
+<hr color="#482b1d" size="1" />
+
+<table width="500">
+<tr><td>
+
+<!-- ******* Start - Insert Main Content  *******-->
+
+
+<!-- ******* 
+Note: 
+
+Wrap each paragraph with p tag.
+ie: <p> Insert paragraph here </p>
+
+Insert "align=left" inside img tag if you want the text around it to wrap around the image.
+ie: <img src="files/imagefile.gif" align="left" />
+
+Insert <br /> for linebreak
+
+ *******-->
+
+<h2>
+<img src="http://media.wwnorton.com/college/history/US History Tours/gearth_logo.jpg" />
+Norton U.S. History Tour: Hiroshima, Japan, August 6, 1945</h2>
+<p>
+<img src="http://media.wwnorton.com/college/history/US History Tours/WWII/hiroshima_cloud.gif"></p>
+<p>
+[At the time this photo was made, smoke billowed 20,000 feet above Hiroshima while smoke from the burst of the first atomic bomb had spread over 10,000 feet on the target at the base of the rising column.Two planes of the 509th Composite Group, part of the 313th Wing of the 20th Air Force, participated in this mission, one to carry the bomb, the other to act as escort, 08/06/1945 ARC Identifier 542192 / Local Identifier 342-AF-58189]</p>
+<p>
+In May, 1945, the Truman White House created a committee to study the use of the atomic weapons then being developed.  This committee did not debate whether or not to use the bomb, a decision that one participant called “a foregone conclusion.”  Some members favored demonstrating the bomb’s power to the Japanese by detonating it on a remote island.  The committee, however, rejected that proposal, instead favoring the use of the bomb against Japan.  From a list of potential targets the committee selected Hiroshima, a city about five hundred miles west of Tokyo.  That city had been spared from bombings, and thus would serve to measure the damage caused by the bomb.</p>
+<p>
+The United States successfully tested an atomic bomb in the New Mexico desert on July 16, 1945.  Three weeks later the bomber Enola Gay dropped an atomic bomb by parachute over Hiroshima on the morning of August 6, 1945.  The bomb destroyed some five square miles of the city and killed as many as 140,000 people, some dying during the blast, others from radiation poisoning.  When the Japanese government failed to respond to the destruction of Hiroshima, Americans targeted a second city, Nagasaki, which was bombed three days later.  </p>
+<p>
+<object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/u0TPN43XXsk&hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/u0TPN43XXsk&hl=en&fs=1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object></p>
+<p>
+[US Army - Navy Screen Magazine Movie excerpt, with footage from the first nuclear bomb test to the bombing of Hiroshima and its aftermath.]</p>
+<p>
+<img src="http://media.wwnorton.com/college/history/US History Tours/WWII/hiroshima_victim.jpg"></p>
+<p>
+[Navy photographer pictures suffering and ruins that resulted from atom bomb blast in Hiroshima, Japan. Victim lies in make-shift hospital in bank building., 09/1945
+ARC Identifier 520933 / Local Identifier 80-G-473739]
+</p>
+
+</td></tr></table>
+
+
+<hr color="#482b1d" size=1 />
+
+<br /><br />
+<table width="500"><tr>
+<td  width="200">
+ <a href="http://nortonebooks.com/disciplines/discipline2.asp?Discid=11">
+<img src="http://media.wwnorton.com/college/history/US History Tours/ebook_sm.gif" /></a>
+ Access <em>America: A Narrative History</em> Ebook
+</td><td  width="200">
+<a href="http://www.wwnorton.com/studyspace/disciplines/history.asp">
+<img src="http://media.wwnorton.com/college/history/US History Tours/s_s.jpg" /></a> 
+Visit Norton History StudySpace</td></tr></table>
+
+<p align="center"><a href="http://www.wwnorton.com"> <font color="#666"> &copy; Copyright 2009 W.W. Norton &amp; Company</font></a></p>]]></description>
+			<LookAt>
+				<longitude>132.4552789793631</longitude>
+				<latitude>34.38518009241844</latitude>
+				<altitude>0</altitude>
+				<heading>-1.157181464201246e-06</heading>
+				<tilt>0</tilt>
+				<range>12748.77246334116</range>
+				<altitudeMode>relativeToGround</altitudeMode>
+			</LookAt>
+			<styleUrl>#msn_ylw-pushpin_copy:0_copy5211111</styleUrl>
+			<Point>
+				<coordinates>132.4436354855159,34.38477916786479,0</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+</Document>
+</kml>
