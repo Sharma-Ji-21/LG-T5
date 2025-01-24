@@ -99,23 +99,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Icon(
-              _ipController.text.isNotEmpty ? Icons.check : Icons.circle,
-              color: _ipController.text.isNotEmpty ? Colors.blue : Colors.grey,
+              _ipController.text.isNotEmpty ? Icons.check : Icons.dangerous,
+              color: _ipController.text.isNotEmpty ? Colors.green : Colors.red,
               size: 16,
             ),
             Icon(
-              _portController.text.isNotEmpty ? Icons.check : Icons.circle,
-              color: _portController.text.isNotEmpty ? Colors.blue : Colors.grey,
+              _portController.text.isNotEmpty ? Icons.check : Icons.dangerous,
+              color: _portController.text.isNotEmpty ? Colors.green : Colors.red,
               size: 16,
             ),
             Icon(
-              _usernameController.text.isNotEmpty ? Icons.check : Icons.circle,
-              color: _usernameController.text.isNotEmpty ? Colors.blue : Colors.grey,
+              _usernameController.text.isNotEmpty ? Icons.check : Icons.dangerous,
+              color: _usernameController.text.isNotEmpty ? Colors.green : Colors.red,
               size: 16,
             ),
             Icon(
-              _passwordController.text.isNotEmpty ? Icons.check : Icons.circle,
-              color: _passwordController.text.isNotEmpty ? Colors.blue : Colors.grey,
+              _passwordController.text.isNotEmpty ? Icons.check : Icons.dangerous,
+              color: _passwordController.text.isNotEmpty ? Colors.green : Colors.red,
               size: 16,
             ),
           ],
