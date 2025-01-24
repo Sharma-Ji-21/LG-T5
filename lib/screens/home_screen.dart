@@ -12,8 +12,8 @@ import 'package:path_provider/path_provider.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  Future<void> _handleKMLUpload(
-      BuildContext context, SSHService sshService, String kmlFileName) async {
+  Future<void> _handleKMLUpload(BuildContext context, SSHService sshService,
+      String kmlFileName) async {
     if (!sshService.isConnected) {
       ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Please connect to SSH first')));
@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
 
     try {
       final String kmlContent =
-          await rootBundle.loadString('assets/$kmlFileName.kml');
+      await rootBundle.loadString('assets/$kmlFileName.kml');
       final directory = await getTemporaryDirectory();
       final File tempFile = File('${directory.path}/$kmlFileName.kml');
       await tempFile.writeAsString(kmlContent);
@@ -43,8 +43,8 @@ class HomeScreen extends StatelessWidget {
     }
   }
 
-  Future<void> _handleRelaunch(
-      BuildContext context, SSHService sshService) async {
+  Future<void> _handleRelaunch(BuildContext context,
+      SSHService sshService) async {
     if (!sshService.isConnected) {
       ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Please connect to SSH first')));
@@ -71,8 +71,8 @@ class HomeScreen extends StatelessWidget {
     }
   }
 
-  Future<void> _handleCleanKML(
-      BuildContext context, SSHService sshService) async {
+  Future<void> _handleCleanKML(BuildContext context,
+      SSHService sshService) async {
     if (!sshService.isConnected) {
       ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Please connect to SSH first')));
@@ -96,98 +96,111 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer<SSHService>(
-        builder: (context, sshService, child) {
-          return LayoutBuilder(
-            builder: (context, constraints) {
-              double upperHalfHeight = constraints.maxHeight / 2;
-              return Column(
-                children: [
-                  SizedBox(
-                    height: upperHalfHeight,
-                    child: PageView(
-                      scrollDirection: Axis.horizontal,
-                      physics: const PageScrollPhysics(),
-                      children: [
-                        Center(
-                          child: DiwaliPartyButton(
-                              onPressed: () => _handleKMLUpload(
-                                  context, sshService, 'kml1')),
-                        ),
-                        Center(
-                          child: ElevatedButton(
-                            onPressed: sshService.isConnected
-                                ? () => _handleKMLUpload(
-                                    context, sshService, 'kml2')
-                                : null,
-                            style: ElevatedButton.styleFrom(
-                                minimumSize: const Size(350, 200)),
-                            child: const Text("Run KML 2",
-                                style: TextStyle(fontSize: 28)),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Stack(
-                      children: [
-                        Center(
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 12, horizontal: 16),
-                            decoration: BoxDecoration(
-                              color: sshService.isConnected
-                                  ? Colors.green[600]
-                                  : Colors.red[600],
-                              borderRadius: BorderRadius.circular(10),
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: Colors.black26,
-                                  offset: Offset(0, 2),
-                                  blurRadius: 6,
-                                ),
-                              ],
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          // Background Image
+          Image.asset(
+            'assets/bgImg4.jpg',
+            fit: BoxFit.cover,
+          ),
+          Consumer<SSHService>(
+            builder: (context, sshService, child) {
+              return LayoutBuilder(
+                builder: (context, constraints) {
+                  double upperHalfHeight = constraints.maxHeight / 2;
+                  return Column(
+                    children: [
+                      SizedBox(
+                        height: upperHalfHeight,
+                        child: PageView(
+                          scrollDirection: Axis.horizontal,
+                          physics: const PageScrollPhysics(),
+                          children: [
+                            Center(
+                              child: DiwaliPartyButton(
+                                  onPressed: () =>
+                                      _handleKMLUpload(
+                                          context, sshService, 'kml1')),
                             ),
-                            child: Text(
-                              sshService.isConnected
-                                  ? 'Connected'
-                                  : 'Disconnected',
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
+                            Center(
+                              child: ElevatedButton(
+                                onPressed: sshService.isConnected
+                                    ? () =>
+                                    _handleKMLUpload(
+                                        context, sshService, 'kml2')
+                                    : null,
+                                style: ElevatedButton.styleFrom(
+                                    minimumSize: const Size(350, 200)),
+                                child: const Text("Run KML 2",
+                                    style: TextStyle(fontSize: 28)),
                               ),
                             ),
-                          ),
+                          ],
                         ),
-                        Align(
-                          alignment: const Alignment(0, 0.5),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              CleanKMLButton(
-                                  onPressed: () =>
-                                      _handleCleanKML(context, sshService)),
-                              const SizedBox(height: 10),
-                              ElevatedButton.icon(
-                                onPressed: sshService.isConnected
-                                    ? () => _handleRelaunch(context, sshService)
-                                    : null,
-                                icon: const Icon(Icons.refresh),
-                                label: const Text('Relaunch LG'),
+                      ),
+                      Center(
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 19, horizontal: 34),
+                          decoration: BoxDecoration(
+                            color: sshService.isConnected
+                                ? Colors.green[600]
+                                : Colors.red[600],
+                            borderRadius: BorderRadius.circular(30),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.black26,
+                                offset: Offset(0, 2),
+                                blurRadius: 6,
                               ),
                             ],
                           ),
+                          child: Text(
+                            sshService.isConnected
+                                ? 'Connected'
+                                : 'Disconnected',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 26,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
-                      ],
-                    ),
-                  ),
-                ],
+                      ),
+                      Expanded(
+                        child: Stack(
+                          children: [
+                            Align(
+                              alignment: const Alignment(0, 0.5),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  CleanKMLButton(
+                                      onPressed: () =>
+                                          _handleCleanKML(context, sshService)),
+                                  const SizedBox(height: 10),
+                                  ElevatedButton.icon(
+                                    onPressed: sshService.isConnected
+                                        ? () =>
+                                        _handleRelaunch(context, sshService)
+                                        : null,
+                                    icon: const Icon(Icons.refresh),
+                                    label: const Text('Relaunch LG'),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                },
               );
             },
-          );
-        },
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

@@ -17,7 +17,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final _ipController = TextEditingController();
   final _portController = TextEditingController(text: '22');
 
-  double _progressValue = 0.0;
+  int _currentStep = 0;
+
+  final List<String> _steps = [
+    'IP Address',
+    'Port',
+    'Username',
+    'Password',
+  ];
 
   @override
   void initState() {
@@ -32,129 +39,129 @@ class _ProfileScreenState extends State<ProfileScreen> {
       _usernameController.text = prefs.getString('username') ?? '';
       _portController.text = (prefs.getInt('port') ?? 22).toString();
       _passwordController.text = prefs.getString('password') ?? '';
+
+      // Update current step based on filled fields
+      _updateCurrentStep();
     });
-    _updateProgress();
   }
 
-  void _updateProgress() {
+  void _updateCurrentStep() {
+    final sshService = Provider.of<SSHService>(context, listen: false);
     int completedFields = 0;
     if (_ipController.text.isNotEmpty) completedFields++;
     if (_portController.text.isNotEmpty) completedFields++;
     if (_usernameController.text.isNotEmpty) completedFields++;
     if (_passwordController.text.isNotEmpty) completedFields++;
+
     setState(() {
-      _progressValue = completedFields / 4;
+      _currentStep = sshService.isConnected ? _steps.length : completedFields;
     });
   }
 
-  @override
-  void dispose() {
-    _usernameController.dispose();
-    _passwordController.dispose();
-    _ipController.dispose();
-    _portController.dispose();
-    super.dispose();
-  }
-
   Widget _buildProgressIndicator() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Text(
-        //   '${(_progressValue * 100).toStringAsFixed(0)}%',
-        //   style: const TextStyle(
-        //     fontSize: 16,
-        //     fontWeight: FontWeight.bold,
-        //   ),
-        // ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text('IP Address'),
-            const Text('Port'),
-            const Text('Username'),
-            const Text('Password'),
-          ],
-        ),
-        const SizedBox(height: 8.0),
-        LinearProgressIndicator(
-          value: _progressValue,
-          color: Colors.blue,
-          backgroundColor: Colors.grey[300],
-        ),
-        const SizedBox(height: 12.0),
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //   children: [
-        //     const Text('IP Address'),
-        //     Icon(
-        //       _ipController.text.isNotEmpty ? Icons.check : Icons.circle,
-        //       color: _ipController.text.isNotEmpty ? Colors.blue : Colors.grey,
-        //       size: 16,
-        //     ),
-        //   ],
-        // ),
-        const SizedBox(height: 8.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Icon(
-              _ipController.text.isNotEmpty ? Icons.check : Icons.dangerous,
-              color: _ipController.text.isNotEmpty ? Colors.green : Colors.red,
-              size: 16,
+    var lineWidth = MediaQuery.of(context).size.width - 32.0; // screen width - 2 * padding
+    var space = lineWidth / _steps.length;
+    final sshService = Provider.of<SSHService>(context);
+
+    return SizedBox(
+      height: 60.0,
+      child: Stack(
+        children: [
+          // Grey base line
+          Positioned(
+            top: 15,
+            left: 0,
+            right: 0,
+            child: Container(
+              height: 2.0,
+              width: double.infinity,
+              color: Colors.grey,
             ),
-            Icon(
-              _portController.text.isNotEmpty ? Icons.check : Icons.dangerous,
-              color:
-                  _portController.text.isNotEmpty ? Colors.green : Colors.red,
-              size: 16,
+          ),
+          // Orange progress line
+          Positioned(
+            top: 15,
+            left: 0,
+            child: Container(
+              height: 2.0,
+              width: sshService.isConnected
+                  ? lineWidth // Fill the full width when connected
+                  : space * (_currentStep - 1) + space / 2,
+              color: Colors.blue,
             ),
-            Icon(
-              _usernameController.text.isNotEmpty
-                  ? Icons.check
-                  : Icons.dangerous,
-              color: _usernameController.text.isNotEmpty
-                  ? Colors.green
-                  : Colors.red,
-              size: 16,
-            ),
-            Icon(
-              _passwordController.text.isNotEmpty
-                  ? Icons.check
-                  : Icons.dangerous,
-              color: _passwordController.text.isNotEmpty
-                  ? Colors.green
-                  : Colors.red,
-              size: 16,
-            ),
-          ],
-        ),
-        const SizedBox(height: 8.0),
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //   children: [
-        //     const Text('Username'),
-        //     Icon(
-        //       _usernameController.text.isNotEmpty ? Icons.check : Icons.circle,
-        //       color: _usernameController.text.isNotEmpty ? Colors.blue : Colors.grey,
-        //       size: 16,
-        //     ),
-        //   ],
-        // ),
-        // const SizedBox(height: 8.0),
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //   children: [
-        //     const Text('Password'),
-        //     Icon(
-        //       _passwordController.text.isNotEmpty ? Icons.check : Icons.circle,
-        //       color: _passwordController.text.isNotEmpty ? Colors.blue : Colors.grey,
-        //       size: 16,
-        //     ),
-        //   ],
-        // ),
-        // const SizedBox(height: 12.0),
-      ],
+          ),
+          // Circles and labels
+          Row(
+            children: _steps
+                .asMap()
+                .map((i, point) => MapEntry(
+              i,
+              SizedBox(
+                width: space,
+                child: Column(
+                  children: [
+                    Stack(
+                      children: [
+                        Container(
+                          height: 30.0,
+                          width: 30.0,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              width: 1.5,
+                              color: i == _currentStep - 1
+                                  ? Colors.blue
+                                  : Colors.transparent,
+                            ),
+                          ),
+                          child: Center(
+                            child: Container(
+                              height: 20.0,
+                              width: 20.0,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: sshService.isConnected && i == _steps.length - 1
+                                    ? Colors.blue
+                                    : i < _currentStep
+                                    ? Colors.blue
+                                    : Colors.grey,
+                              ),
+                            ),
+                          ),
+                        ),
+                        if (i < _currentStep - 1 || (sshService.isConnected && i == _steps.length - 1))
+                          const SizedBox(
+                            height: 30.0,
+                            width: 30.0,
+                            child: Center(
+                              child: Icon(
+                                Icons.check,
+                                size: 16.0,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                    const SizedBox(height: 4.0),
+                    Text(
+                      point,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: i < _currentStep || (sshService.isConnected && i == _steps.length - 1)
+                            ? Colors.blue
+                            : Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ))
+                .values
+                .toList(),
+          ),
+        ],
+      ),
     );
   }
 
@@ -185,7 +192,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   }
                   return null;
                 },
-                onChanged: (value) => _updateProgress(),
+                onChanged: (value) => _updateCurrentStep(),
               ),
               const SizedBox(height: 10),
               TextFormField(
@@ -201,7 +208,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   }
                   return null;
                 },
-                onChanged: (value) => _updateProgress(),
+                onChanged: (value) => _updateCurrentStep(),
               ),
               const SizedBox(height: 10),
               TextFormField(
@@ -216,7 +223,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   }
                   return null;
                 },
-                onChanged: (value) => _updateProgress(),
+                onChanged: (value) => _updateCurrentStep(),
               ),
               const SizedBox(height: 10),
               TextFormField(
@@ -232,7 +239,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   }
                   return null;
                 },
-                onChanged: (value) => _updateProgress(),
+                onChanged: (value) => _updateCurrentStep(),
               ),
               const SizedBox(height: 20),
               Consumer<SSHService>(
@@ -249,23 +256,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           );
                           if (context.mounted) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                  content: Text('Connected successfully')),
+                              const SnackBar(content: Text('Connected successfully')),
                             );
+                            setState(() {
+                              _currentStep = _steps.length; // Set progress to 100%
+                            });
                           }
                         } catch (e) {
                           if (context.mounted) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                  content: Text(
-                                      'Connection failed: ${e.toString()}')),
+                              SnackBar(content: Text('Connection failed: ${e.toString()}')),
                             );
                           }
                         }
                       }
                     },
                     child:
-                        Text(sshService.isConnected ? 'Reconnect' : 'Connect'),
+                    Text(sshService.isConnected ? 'Reconnect' : 'Connect'),
                   );
                 },
               ),
