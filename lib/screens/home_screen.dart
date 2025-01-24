@@ -182,12 +182,21 @@ class HomeScreen extends StatelessWidget {
                                   const SizedBox(height: 10),
                                   ElevatedButton.icon(
                                     onPressed: sshService.isConnected
-                                        ? () =>
-                                        _handleRelaunch(context, sshService)
+                                        ? () => _handleRelaunch(context, sshService)
                                         : null,
-                                    icon: const Icon(Icons.refresh),
-                                    label: const Text('Relaunch LG'),
-                                  ),
+                                    icon: Icon(
+                                      Icons.refresh,
+                                      color: Colors.blue, // Changed icon color to blue
+                                    ),
+                                    label: const Text(
+                                      'Relaunch LG',
+                                      style: TextStyle(color: Colors.blue),
+                                    ),
+                                    style: ElevatedButton.styleFrom(
+                                      foregroundColor: Colors.blue, // Changes splash and highlight color to blue
+                                      splashFactory: InkRipple.splashFactory, // Ensures a clean ripple effect
+                                    ),
+                                  )
                                 ],
                               ),
                             ),

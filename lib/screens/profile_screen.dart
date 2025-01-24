@@ -78,7 +78,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               color: Colors.grey,
             ),
           ),
-          // Orange progress line
+          // Blue progress line
           Positioned(
             top: 15,
             left: 0,
@@ -171,115 +171,210 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(
         title: const Text('Profile'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildProgressIndicator(),
-              const SizedBox(height: 20),
-              TextFormField(
-                controller: _ipController,
-                decoration: const InputDecoration(
-                  labelText: 'IP Address',
-                  hintText: 'Enter IP address',
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter IP address';
-                  }
-                  return null;
-                },
-                onChanged: (value) => _updateCurrentStep(),
-              ),
-              const SizedBox(height: 10),
-              TextFormField(
-                controller: _portController,
-                decoration: const InputDecoration(
-                  labelText: 'Port',
-                  hintText: 'Enter port number',
-                ),
-                keyboardType: TextInputType.number,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter port number';
-                  }
-                  return null;
-                },
-                onChanged: (value) => _updateCurrentStep(),
-              ),
-              const SizedBox(height: 10),
-              TextFormField(
-                controller: _usernameController,
-                decoration: const InputDecoration(
-                  labelText: 'Username',
-                  hintText: 'Enter username',
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter username';
-                  }
-                  return null;
-                },
-                onChanged: (value) => _updateCurrentStep(),
-              ),
-              const SizedBox(height: 10),
-              TextFormField(
-                controller: _passwordController,
-                decoration: const InputDecoration(
-                  labelText: 'Password',
-                  hintText: 'Enter password',
-                ),
-                obscureText: true,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter password';
-                  }
-                  return null;
-                },
-                onChanged: (value) => _updateCurrentStep(),
-              ),
-              const SizedBox(height: 20),
-              Consumer<SSHService>(
-                builder: (context, sshService, child) {
-                  return ElevatedButton(
-                    onPressed: () async {
-                      if (_formKey.currentState!.validate()) {
-                        try {
-                          await sshService.connect(
-                            host: _ipController.text,
-                            username: _usernameController.text,
-                            password: _passwordController.text,
-                            port: int.parse(_portController.text),
-                          );
-                          if (context.mounted) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Connected successfully')),
-                            );
-                            setState(() {
-                              _currentStep = _steps.length; // Set progress to 100%
-                            });
-                          }
-                        } catch (e) {
-                          if (context.mounted) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text('Connection failed: ${e.toString()}')),
-                            );
-                          }
-                        }
-                      }
-                    },
-                    child:
-                    Text(sshService.isConnected ? 'Reconnect' : 'Connect'),
-                  );
-                },
-              ),
-            ],
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          // Background Image
+          Image.asset(
+            'assets/bgImg5.jpg',
+            fit: BoxFit.cover,
           ),
-        ),
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildProgressIndicator(),
+                    const SizedBox(height: 20),
+                    _buildBlueTextField(
+                      controller: _ipController,
+                      labelText: 'IP Address',
+                      hintText: 'Enter IP address',
+                      prefixIcon: Icons.computer,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter IP address';
+                        }
+                        return null;
+                      },
+                      onChanged: (value) => _updateCurrentStep(),
+                    ),
+                    const SizedBox(height: 10),
+                    _buildBlueTextField(
+                      controller: _portController,
+                      labelText: 'Port',
+                      hintText: 'Enter port number',
+                      prefixIcon: Icons.settings_ethernet,
+                      keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter port number';
+                        }
+                        return null;
+                      },
+                      onChanged: (value) => _updateCurrentStep(),
+                    ),
+                    const SizedBox(height: 10),
+                    _buildBlueTextField(
+                      controller: _usernameController,
+                      labelText: 'Username',
+                      hintText: 'Enter username',
+                      prefixIcon: Icons.person,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter username';
+                        }
+                        return null;
+                      },
+                      onChanged: (value) => _updateCurrentStep(),
+                    ),
+                    const SizedBox(height: 10),
+                    _buildBlueTextField(
+                      controller: _passwordController,
+                      labelText: 'Password',
+                      hintText: 'Enter password',
+                      prefixIcon: Icons.lock,
+                      obscureText: true,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter password';
+                        }
+                        return null;
+                      },
+                      onChanged: (value) => _updateCurrentStep(),
+                    ),
+                    const SizedBox(height: 20),
+                    _buildConnectButton(),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
+    );
+  }
+
+  Widget _buildBlueTextField({
+    required TextEditingController controller,
+    required String labelText,
+    required String hintText,
+    required IconData prefixIcon,
+    required String? Function(String?)? validator,
+    required void Function(String)? onChanged,
+    TextInputType? keyboardType,
+    bool obscureText = false,
+  }) {
+    return TextFormField(
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: labelText,
+        labelStyle: TextStyle(color: Colors.blue[700]),
+        hintText: hintText,
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.blue[300]!, width: 1.5),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.blue[700]!, width: 2),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.red, width: 2),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.red, width: 2),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        prefixIcon: Icon(prefixIcon, color: Colors.blue[700]),
+      ),
+      keyboardType: keyboardType,
+      obscureText: obscureText,
+      validator: validator,
+      onChanged: onChanged,
+    );
+  }
+
+  Widget _buildConnectButton() {
+    return Consumer<SSHService>(
+      builder: (context, sshService, child) {
+        return Center(
+          child: ElevatedButton(
+            onPressed: () async {
+              if (_formKey.currentState!.validate()) {
+                try {
+                  await sshService.connect(
+                    host: _ipController.text,
+                    username: _usernameController.text,
+                    password: _passwordController.text,
+                    port: int.parse(_portController.text),
+                  );
+
+                  // Save credentials
+                  final prefs = await SharedPreferences.getInstance();
+                  await prefs.setString('host', _ipController.text);
+                  await prefs.setString('username', _usernameController.text);
+                  await prefs.setString('password', _passwordController.text);
+                  await prefs.setInt('port', int.parse(_portController.text));
+
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Connected successfully'),
+                        backgroundColor: Colors.green,
+                      ),
+                    );
+                    setState(() {
+                      _currentStep = _steps.length; // Set progress to 100%
+                    });
+                  }
+                } catch (e) {
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Connection failed: ${e.toString()}'),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  }
+                }
+              }
+            },
+            style: ElevatedButton.styleFrom(
+              foregroundColor: Colors.white,
+              backgroundColor: Colors.blue[700],
+              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              ),
+              elevation: 5,
+              shadowColor: Colors.blue[900],
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  sshService.isConnected ? Icons.refresh : Icons.connect_without_contact,
+                  color: Colors.white,
+                ),
+                const SizedBox(width: 10),
+                Text(
+                  sshService.isConnected ? 'Reconnect' : 'Connect',
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.2,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
