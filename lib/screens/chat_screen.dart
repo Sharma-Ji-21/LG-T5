@@ -30,17 +30,17 @@ class ChatMessage {
 
   // Convert message to JSON for storage
   Map<String, dynamic> toJson() => {
-    'text': text,
-    'isUser': isUser,
-    'timestamp': timestamp.toIso8601String(),
-  };
+        'text': text,
+        'isUser': isUser,
+        'timestamp': timestamp.toIso8601String(),
+      };
 
   // Create message from JSON
   factory ChatMessage.fromJson(Map<String, dynamic> json) => ChatMessage(
-    text: json['text'],
-    isUser: json['isUser'],
-    timestamp: DateTime.parse(json['timestamp']),
-  );
+        text: json['text'],
+        isUser: json['isUser'],
+        timestamp: DateTime.parse(json['timestamp']),
+      );
 }
 
 class ChatScreenState extends State<ChatScreen> {
@@ -97,11 +97,8 @@ class ChatScreenState extends State<ChatScreen> {
     if (historyJson != null) {
       final List<dynamic> messageJsonList = json.decode(historyJson);
       setState(() {
-        _messages.addAll(
-            messageJsonList.map((msgJson) =>
-                ChatMessage.fromJson(msgJson as Map<String, dynamic>)
-            )
-        );
+        _messages.addAll(messageJsonList.map((msgJson) =>
+            ChatMessage.fromJson(msgJson as Map<String, dynamic>)));
       });
     }
   }
@@ -205,8 +202,8 @@ class ChatScreenState extends State<ChatScreen> {
           color: message.isUser
               ? Theme.of(context).primaryColor
               : _isDarkMode
-              ? Colors.grey[800]
-              : Colors.grey[200],
+                  ? Colors.grey[800]
+                  : Colors.grey[200],
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(message.isUser ? 20.0 : 4.0),
             topRight: Radius.circular(message.isUser ? 4.0 : 20.0),
@@ -232,8 +229,8 @@ class ChatScreenState extends State<ChatScreen> {
                 color: message.isUser
                     ? Colors.white
                     : _isDarkMode
-                    ? Colors.white
-                    : Colors.black87,
+                        ? Colors.white
+                        : Colors.black87,
                 fontSize: 16.0,
               ),
             ),
@@ -244,8 +241,8 @@ class ChatScreenState extends State<ChatScreen> {
                 color: message.isUser
                     ? Colors.white70
                     : _isDarkMode
-                    ? Colors.white70
-                    : Colors.black54,
+                        ? Colors.white70
+                        : Colors.black54,
                 fontSize: 12.0,
               ),
             ),
@@ -300,7 +297,8 @@ class ChatScreenState extends State<ChatScreen> {
                 controller: _scrollController,
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 itemCount: _messages.length,
-                itemBuilder: (context, index) => _buildMessageBubble(_messages[index]),
+                itemBuilder: (context, index) =>
+                    _buildMessageBubble(_messages[index]),
               ),
             ),
             if (_isLoading)

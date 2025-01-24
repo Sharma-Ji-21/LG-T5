@@ -115,7 +115,8 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
     return Theme(
       data: _isDarkMode ? ThemeData.dark() : ThemeData.light(),
       child: MediaQuery(
-        data: MediaQuery.of(context).copyWith(textScaleFactor: _textScaleFactor),
+        data:
+            MediaQuery.of(context).copyWith(textScaleFactor: _textScaleFactor),
         child: Scaffold(
           body: TabBarView(
             physics: NeverScrollableScrollPhysics(), // Disable swipe
@@ -125,11 +126,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
           bottomNavigationBar: MotionTabBar(
             initialSelectedTab: "Home",
             labels: const ["Home", "Profile", "Settings"],
-            icons: const [
-              Icons.home,
-              Icons.person,
-              Icons.settings
-            ],
+            icons: const [Icons.home, Icons.person, Icons.settings],
             tabSize: 50,
             tabBarHeight: 55,
             textStyle: const TextStyle(

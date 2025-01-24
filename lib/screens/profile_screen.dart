@@ -105,17 +105,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             Icon(
               _portController.text.isNotEmpty ? Icons.check : Icons.dangerous,
-              color: _portController.text.isNotEmpty ? Colors.green : Colors.red,
+              color:
+                  _portController.text.isNotEmpty ? Colors.green : Colors.red,
               size: 16,
             ),
             Icon(
-              _usernameController.text.isNotEmpty ? Icons.check : Icons.dangerous,
-              color: _usernameController.text.isNotEmpty ? Colors.green : Colors.red,
+              _usernameController.text.isNotEmpty
+                  ? Icons.check
+                  : Icons.dangerous,
+              color: _usernameController.text.isNotEmpty
+                  ? Colors.green
+                  : Colors.red,
               size: 16,
             ),
             Icon(
-              _passwordController.text.isNotEmpty ? Icons.check : Icons.dangerous,
-              color: _passwordController.text.isNotEmpty ? Colors.green : Colors.red,
+              _passwordController.text.isNotEmpty
+                  ? Icons.check
+                  : Icons.dangerous,
+              color: _passwordController.text.isNotEmpty
+                  ? Colors.green
+                  : Colors.red,
               size: 16,
             ),
           ],
@@ -248,15 +257,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           if (context.mounted) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
-                                  content:
-                                  Text('Connection failed: ${e.toString()}')),
+                                  content: Text(
+                                      'Connection failed: ${e.toString()}')),
                             );
                           }
                         }
                       }
                     },
                     child:
-                    Text(sshService.isConnected ? 'Reconnect' : 'Connect'),
+                        Text(sshService.isConnected ? 'Reconnect' : 'Connect'),
                   );
                 },
               ),

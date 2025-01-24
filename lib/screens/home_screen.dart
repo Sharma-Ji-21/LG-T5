@@ -12,14 +12,17 @@ import 'package:path_provider/path_provider.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  Future<void> _handleKMLUpload(BuildContext context, SSHService sshService, String kmlFileName) async {
+  Future<void> _handleKMLUpload(
+      BuildContext context, SSHService sshService, String kmlFileName) async {
     if (!sshService.isConnected) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Please connect to SSH first')));
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Please connect to SSH first')));
       return;
     }
 
     try {
-      final String kmlContent = await rootBundle.loadString('assets/$kmlFileName.kml');
+      final String kmlContent =
+          await rootBundle.loadString('assets/$kmlFileName.kml');
       final directory = await getTemporaryDirectory();
       final File tempFile = File('${directory.path}/$kmlFileName.kml');
       await tempFile.writeAsString(kmlContent);
@@ -29,18 +32,22 @@ class HomeScreen extends StatelessWidget {
       await tempFile.delete();
 
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('KML uploaded and executed successfully')));
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text('KML uploaded and executed successfully')));
       }
     } catch (e) {
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Failed to process KML: $e')));
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('Failed to process KML: $e')));
       }
     }
   }
 
-  Future<void> _handleRelaunch(BuildContext context, SSHService sshService) async {
+  Future<void> _handleRelaunch(
+      BuildContext context, SSHService sshService) async {
     if (!sshService.isConnected) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Please connect to SSH first')));
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Please connect to SSH first')));
       return;
     }
 
@@ -48,33 +55,40 @@ class HomeScreen extends StatelessWidget {
       final prefs = await SharedPreferences.getInstance();
       final username = prefs.getString('username');
       final password = prefs.getString('password');
-      if (username == null || password == null) throw Exception('Username or password not found');
+      if (username == null || password == null)
+        throw Exception('Username or password not found');
 
       await sshService.relaunchLG(username, password);
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Relaunch command executed successfully')));
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text('Relaunch command executed successfully')));
       }
     } catch (e) {
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Failed to relaunch: $e')));
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('Failed to relaunch: $e')));
       }
     }
   }
 
-  Future<void> _handleCleanKML(BuildContext context, SSHService sshService) async {
+  Future<void> _handleCleanKML(
+      BuildContext context, SSHService sshService) async {
     if (!sshService.isConnected) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Please connect to SSH first')));
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Please connect to SSH first')));
       return;
     }
 
     try {
       await sshService.cleanKML();
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('KML cleaned successfully')));
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('KML cleaned successfully')));
       }
     } catch (e) {
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Failed to clean KML: $e')));
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('Failed to clean KML: $e')));
       }
     }
   }
@@ -96,13 +110,20 @@ class HomeScreen extends StatelessWidget {
                       physics: const PageScrollPhysics(),
                       children: [
                         Center(
-                          child: DiwaliPartyButton(onPressed: () => _handleKMLUpload(context, sshService, 'kml1')),
+                          child: DiwaliPartyButton(
+                              onPressed: () => _handleKMLUpload(
+                                  context, sshService, 'kml1')),
                         ),
                         Center(
                           child: ElevatedButton(
-                            onPressed: sshService.isConnected ? () => _handleKMLUpload(context, sshService, 'kml2') : null,
-                            style: ElevatedButton.styleFrom(minimumSize: const Size(350, 200)),
-                            child: const Text("Run KML 2", style: TextStyle(fontSize: 28)),
+                            onPressed: sshService.isConnected
+                                ? () => _handleKMLUpload(
+                                    context, sshService, 'kml2')
+                                : null,
+                            style: ElevatedButton.styleFrom(
+                                minimumSize: const Size(350, 200)),
+                            child: const Text("Run KML 2",
+                                style: TextStyle(fontSize: 28)),
                           ),
                         ),
                       ],
@@ -113,9 +134,12 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         Center(
                           child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 12, horizontal: 16),
                             decoration: BoxDecoration(
-                              color: sshService.isConnected ? Colors.green[600] : Colors.red[600],
+                              color: sshService.isConnected
+                                  ? Colors.green[600]
+                                  : Colors.red[600],
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: const [
                                 BoxShadow(
@@ -126,7 +150,9 @@ class HomeScreen extends StatelessWidget {
                               ],
                             ),
                             child: Text(
-                              sshService.isConnected ? 'Connected' : 'Disconnected',
+                              sshService.isConnected
+                                  ? 'Connected'
+                                  : 'Disconnected',
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
@@ -140,10 +166,14 @@ class HomeScreen extends StatelessWidget {
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              CleanKMLButton(onPressed: () => _handleCleanKML(context, sshService)),
+                              CleanKMLButton(
+                                  onPressed: () =>
+                                      _handleCleanKML(context, sshService)),
                               const SizedBox(height: 10),
                               ElevatedButton.icon(
-                                onPressed: sshService.isConnected ? () => _handleRelaunch(context, sshService) : null,
+                                onPressed: sshService.isConnected
+                                    ? () => _handleRelaunch(context, sshService)
+                                    : null,
                                 icon: const Icon(Icons.refresh),
                                 label: const Text('Relaunch LG'),
                               ),
@@ -161,7 +191,8 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => const ChatScreen()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const ChatScreen()));
         },
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -186,7 +217,8 @@ class _DiwaliPartyButtonState extends State<DiwaliPartyButton> {
   @override
   void initState() {
     super.initState();
-    _confettiController = ConfettiController(duration: const Duration(seconds: 3));
+    _confettiController =
+        ConfettiController(duration: const Duration(seconds: 3));
   }
 
   @override
@@ -206,8 +238,10 @@ class _DiwaliPartyButtonState extends State<DiwaliPartyButton> {
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.orangeAccent,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 80),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 40, horizontal: 80),
                 elevation: 15,
                 shadowColor: Colors.deepOrange,
               ),
@@ -215,13 +249,23 @@ class _DiwaliPartyButtonState extends State<DiwaliPartyButton> {
                 _confettiController.play();
                 widget.onPressed();
               },
-              child: const Text('🎊 Diwali Party 🎊', style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white)),
+              child: const Text('🎊 Diwali Party 🎊',
+                  style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white)),
             ),
             ConfettiWidget(
               confettiController: _confettiController,
               blastDirectionality: BlastDirectionality.explosive,
               shouldLoop: false,
-              colors: [Colors.red, Colors.orange, Colors.yellow, Colors.green, Colors.blue],
+              colors: [
+                Colors.red,
+                Colors.orange,
+                Colors.yellow,
+                Colors.green,
+                Colors.blue
+              ],
               numberOfParticles: 20,
               gravity: 0.2,
             ),
@@ -247,7 +291,8 @@ class _CleanKMLButtonState extends State<CleanKMLButton> {
   @override
   void initState() {
     super.initState();
-    _confettiController = ConfettiController(duration: const Duration(seconds: 3));
+    _confettiController =
+        ConfettiController(duration: const Duration(seconds: 3));
   }
 
   @override
@@ -267,8 +312,10 @@ class _CleanKMLButtonState extends State<CleanKMLButton> {
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.lightBlueAccent,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                 elevation: 15,
                 shadowColor: Colors.blueGrey,
               ),
@@ -276,13 +323,22 @@ class _CleanKMLButtonState extends State<CleanKMLButton> {
                 _confettiController.play();
                 widget.onPressed();
               },
-              child: const Text('🧹✨ Clean KML ✨🧼', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white)),
+              child: const Text('🧹✨ Clean KML ✨🧼',
+                  style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white)),
             ),
             ConfettiWidget(
               confettiController: _confettiController,
               blastDirectionality: BlastDirectionality.explosive,
               shouldLoop: false,
-              colors: [Colors.lightBlue, Colors.white, Colors.tealAccent, Colors.cyan],
+              colors: [
+                Colors.lightBlue,
+                Colors.white,
+                Colors.tealAccent,
+                Colors.cyan
+              ],
               numberOfParticles: 25,
               gravity: 0.2,
             ),

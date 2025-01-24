@@ -29,52 +29,29 @@ class _GeminiUiState extends State<GeminiUi> with TickerProviderStateMixin {
   @override
   void initState() {
     animationController1 = AnimationController(
-        vsync: this,
-        duration: const Duration(milliseconds: 1200)
-    );
+        vsync: this, duration: const Duration(milliseconds: 1200));
 
     animationController2 = AnimationController(
-        vsync: this,
-        duration: const Duration(milliseconds: 1500)
-    );
+        vsync: this, duration: const Duration(milliseconds: 1500));
 
     animationController3 = AnimationController(
-        vsync: this,
-        duration: const Duration(milliseconds: 1500)
-    );
+        vsync: this, duration: const Duration(milliseconds: 1500));
 
     animationController4 = AnimationController(
-        vsync: this,
-        duration: const Duration(milliseconds: 1500)
-    );
+        vsync: this, duration: const Duration(milliseconds: 1500));
 
     scaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
         CurvedAnimation(
-            parent: animationController1,
-            curve: Curves.easeOutCubic
-        )
-    );
+            parent: animationController1, curve: Curves.easeOutCubic));
 
     flowerRotationAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-        CurvedAnimation(
-            parent: animationController2,
-            curve: Curves.linear
-        )
-    );
+        CurvedAnimation(parent: animationController2, curve: Curves.linear));
 
     longImageRotationAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-        CurvedAnimation(
-            parent: animationController3,
-            curve: Curves.linear
-        )
-    );
+        CurvedAnimation(parent: animationController3, curve: Curves.linear));
 
     hexagonRotationAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-        CurvedAnimation(
-            parent: animationController4,
-            curve: Curves.linear
-        )
-    );
+        CurvedAnimation(parent: animationController4, curve: Curves.linear));
 
     super.initState();
   }
@@ -121,7 +98,7 @@ class _GeminiUiState extends State<GeminiUi> with TickerProviderStateMixin {
         );
       },
       child: Container(
-        color: Colors.transparent, // Set background color to match home screen
+        color: Colors.transparent,
         child: AnimatedBuilder(
           animation: scaleAnimation,
           builder: (context, child) {
@@ -136,9 +113,8 @@ class _GeminiUiState extends State<GeminiUi> with TickerProviderStateMixin {
                       width: 250.0,
                       decoration: BoxDecoration(
                         color: Colors.blue,
-                        borderRadius: BorderRadius.circular(
-                            !isTransformed ? 1000 : 0
-                        ),
+                        borderRadius:
+                            BorderRadius.circular(!isTransformed ? 1000 : 0),
                       ),
                     ),
                   ),
@@ -148,7 +124,8 @@ class _GeminiUiState extends State<GeminiUi> with TickerProviderStateMixin {
                       animation: flowerRotationAnimation,
                       builder: (context, child) {
                         return Transform.rotate(
-                          angle: (flowerRotationAnimation.value + 100) * pi / 1.0,
+                          angle:
+                              (flowerRotationAnimation.value + 100) * pi / 1.0,
                           child: Image.asset(
                             animationImages[currentImageIndex],
                             height: 250.0,
@@ -162,7 +139,9 @@ class _GeminiUiState extends State<GeminiUi> with TickerProviderStateMixin {
                       animation: longImageRotationAnimation,
                       builder: (context, child) {
                         return Transform.rotate(
-                          angle: (longImageRotationAnimation.value + 100) * pi / 1.0,
+                          angle: (longImageRotationAnimation.value + 100) *
+                              pi /
+                              1.0,
                           child: Image.asset(
                             animationImages[currentImageIndex],
                             height: 250.0,
@@ -176,7 +155,8 @@ class _GeminiUiState extends State<GeminiUi> with TickerProviderStateMixin {
                       animation: hexagonRotationAnimation,
                       builder: (context, child) {
                         return Transform.rotate(
-                          angle: (hexagonRotationAnimation.value + 100) * pi / 1.0,
+                          angle:
+                              (hexagonRotationAnimation.value + 100) * pi / 1.0,
                           child: Image.asset(
                             animationImages[currentImageIndex],
                             height: 250.0,

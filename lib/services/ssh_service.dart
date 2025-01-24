@@ -74,8 +74,8 @@ class SSHService extends ChangeNotifier {
       final remoteFile = await sftp.open(
         '/var/www/html/$kmlName.kml',
         mode: SftpFileOpenMode.create |
-        SftpFileOpenMode.truncate |
-        SftpFileOpenMode.write,
+            SftpFileOpenMode.truncate |
+            SftpFileOpenMode.write,
       );
 
       final fileSize = await kmlFile.length();
@@ -112,14 +112,16 @@ class SSHService extends ChangeNotifier {
   Future<void> flyTo(String latitude, String longitude) async {
     if (!_isConnected) throw Exception('Not connected');
     try {
-      await executeCommand("echo 'search=$latitude,$longitude' > /tmp/query.txt");
+      await executeCommand(
+          "echo 'search=$latitude,$longitude' > /tmp/query.txt");
     } catch (error) {
       print("Error in flyTo: $error");
       rethrow;
     }
   }
 
-  Future<void> relaunchLG(String username, String password, {int numberOfRigs = 3}) async {
+  Future<void> relaunchLG(String username, String password,
+      {int numberOfRigs = 3}) async {
     if (!_isConnected) throw Exception('Not connected');
     try {
       for (var i = 1; i <= numberOfRigs; i++) {
@@ -138,7 +140,8 @@ class SSHService extends ChangeNotifier {
           fi
           " && sshpass -p $password ssh -x -t lg@lg$i "\$RELAUNCH_CMD\"""";
 
-        await executeCommand('"/home/$username/bin/lg-relaunch" > /home/$username/log.txt');
+        await executeCommand(
+            '"/home/$username/bin/lg-relaunch" > /home/$username/log.txt');
         await executeCommand(relaunchCmd);
       }
     } catch (error) {
