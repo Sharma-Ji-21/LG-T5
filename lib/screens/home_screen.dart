@@ -2,27 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:confetti/confetti.dart';
-import '../Ui/geminiUi.dart';
-import '../services/ssh_service.dart';
-import 'chat_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
+import '../Ui/geminiUi.dart';
+import '../services/ssh_service.dart';
+import 'chat_screen.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  Future<void> _handleKMLUpload(BuildContext context, SSHService sshService,
-      String kmlFileName) async {
+  Future<void> _handleKMLUpload(BuildContext context, SSHService sshService, String kmlFileName) async {
     if (!sshService.isConnected) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Please connect to SSH first')));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please connect to SSH first')));
       return;
     }
 
     try {
-      final String kmlContent =
-      await rootBundle.loadString('assets/$kmlFileName.kml');
+      final String kmlContent = await rootBundle.loadString('assets/$kmlFileName.kml');
       final directory = await getTemporaryDirectory();
       final File tempFile = File('${directory.path}/$kmlFileName.kml');
       await tempFile.writeAsString(kmlContent);
@@ -30,24 +28,14 @@ class HomeScreen extends StatelessWidget {
       await sshService.uploadKMLFile(tempFile, kmlFileName);
       await sshService.runKML(kmlFileName);
       await tempFile.delete();
-
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text('KML uploaded and executed successfully')));
-      }
     } catch (e) {
-      if (context.mounted) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('Failed to process KML: $e')));
-      }
+      print('Error uploading KML');
     }
   }
 
-  Future<void> _handleRelaunch(BuildContext context,
-      SSHService sshService) async {
+  Future<void> _handleRelaunch(BuildContext context, SSHService sshService) async {
     if (!sshService.isConnected) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Please connect to SSH first')));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please connect to SSH first')));
       return;
     }
 
@@ -55,41 +43,26 @@ class HomeScreen extends StatelessWidget {
       final prefs = await SharedPreferences.getInstance();
       final username = prefs.getString('username');
       final password = prefs.getString('password');
-      if (username == null || password == null)
-        throw Exception('Username or password not found');
+      if (username == null || password == null) {
+        throw Exception('Credentials not found');
+      }
 
       await sshService.relaunchLG(username, password);
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text('Relaunch command executed successfully')));
-      }
     } catch (e) {
-      if (context.mounted) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('Failed to relaunch: $e')));
-      }
+      print('Error relaunching');
     }
   }
 
-  Future<void> _handleCleanKML(BuildContext context,
-      SSHService sshService) async {
+  Future<void> _handleCleanKML(BuildContext context, SSHService sshService) async {
     if (!sshService.isConnected) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Please connect to SSH first')));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please connect to SSH first')));
       return;
     }
 
     try {
       await sshService.cleanKML();
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('KML cleaned successfully')));
-      }
     } catch (e) {
-      if (context.mounted) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('Failed to clean KML: $e')));
-      }
+      print('Error cleaning KML');
     }
   }
 
@@ -99,11 +72,7 @@ class HomeScreen extends StatelessWidget {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          // Background Image
-          Image.asset(
-            'assets/bgImg4.jpg',
-            fit: BoxFit.cover,
-          ),
+          Image.asset('assets/bgImg5.jpg', fit: BoxFit.cover),
           Consumer<SSHService>(
             builder: (context, sshService, child) {
               return LayoutBuilder(
@@ -115,94 +84,15 @@ class HomeScreen extends StatelessWidget {
                         height: upperHalfHeight,
                         child: PageView(
                           scrollDirection: Axis.horizontal,
-                          physics: const PageScrollPhysics(),
+                          physics: PageScrollPhysics(),
                           children: [
-                            Center(
-                              child: DiwaliPartyButton(
-                                  onPressed: () =>
-                                      _handleKMLUpload(
-                                          context, sshService, 'kml1')),
-                            ),
-                            Center(
-                              child: ElevatedButton(
-                                onPressed: sshService.isConnected
-                                    ? () =>
-                                    _handleKMLUpload(
-                                        context, sshService, 'kml2')
-                                    : null,
-                                style: ElevatedButton.styleFrom(
-                                    minimumSize: const Size(350, 200)),
-                                child: const Text("Run KML 2",
-                                    style: TextStyle(fontSize: 28)),
-                              ),
-                            ),
+                            Center(child: DiwaliPartyButton(onPressed: () => _handleKMLUpload(context, sshService, 'kml1'))),
+                            Center(child: World3DButton(onPressed: () => _handleKMLUpload(context, sshService, 'kml2'))),
                           ],
                         ),
                       ),
-                      Center(
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 19, horizontal: 34),
-                          decoration: BoxDecoration(
-                            color: sshService.isConnected
-                                ? Colors.green[600]
-                                : Colors.red[600],
-                            borderRadius: BorderRadius.circular(30),
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Colors.black26,
-                                offset: Offset(0, 2),
-                                blurRadius: 6,
-                              ),
-                            ],
-                          ),
-                          child: Text(
-                            sshService.isConnected
-                                ? 'Connected'
-                                : 'Disconnected',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 26,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Stack(
-                          children: [
-                            Align(
-                              alignment: const Alignment(0, 0.5),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  CleanKMLButton(
-                                      onPressed: () =>
-                                          _handleCleanKML(context, sshService)),
-                                  const SizedBox(height: 10),
-                                  ElevatedButton.icon(
-                                    onPressed: sshService.isConnected
-                                        ? () => _handleRelaunch(context, sshService)
-                                        : null,
-                                    icon: Icon(
-                                      Icons.refresh,
-                                      color: Colors.blue, // Changed icon color to blue
-                                    ),
-                                    label: const Text(
-                                      'Relaunch LG',
-                                      style: TextStyle(color: Colors.blue),
-                                    ),
-                                    style: ElevatedButton.styleFrom(
-                                      foregroundColor: Colors.blue, // Changes splash and highlight color to blue
-                                      splashFactory: InkRipple.splashFactory, // Ensures a clean ripple effect
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      _buildConnectionStatus(sshService),
+                      _buildActionButtons(context, sshService),
                     ],
                   );
                 },
@@ -212,13 +102,50 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const ChatScreen()));
-        },
+        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ChatScreen())),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        child: const SizedBox(width: 56, height: 56, child: GeminiUi()),
+        child: GeminiUi(),
+      ),
+    );
+  }
+
+  Widget _buildConnectionStatus(SSHService sshService) {
+    return Center(
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 19, horizontal: 34),
+        decoration: BoxDecoration(
+          color: sshService.isConnected ? Colors.green[600] : Colors.red[600],
+          borderRadius: BorderRadius.circular(30),
+          boxShadow: [BoxShadow(color: Colors.black26, offset: Offset(0, 2), blurRadius: 6)],
+        ),
+        child: Text(
+          sshService.isConnected ? 'Connected' : 'Disconnected',
+          style: TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildActionButtons(BuildContext context, SSHService sshService) {
+    return Expanded(
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CleanKMLButton(onPressed: () => _handleCleanKML(context, sshService)),
+            SizedBox(height: 10),
+            ElevatedButton.icon(
+              onPressed: sshService.isConnected ? () => _handleRelaunch(context, sshService) : null,
+              icon: Icon(Icons.refresh, color: Colors.blue),
+              label: Text('Relaunch LG', style: TextStyle(color: Colors.blue)),
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.blue,
+                splashFactory: InkRipple.splashFactory,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -362,6 +289,79 @@ class _CleanKMLButtonState extends State<CleanKMLButton> {
                 Colors.cyan
               ],
               numberOfParticles: 25,
+              gravity: 0.2,
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+class World3DButton extends StatefulWidget {
+  final VoidCallback onPressed;
+
+  const World3DButton({required this.onPressed, super.key});
+
+  @override
+  State<World3DButton> createState() => _World3DButtonState();
+}
+
+class _World3DButtonState extends State<World3DButton> {
+  late ConfettiController _confettiController;
+
+  @override
+  void initState() {
+    super.initState();
+    _confettiController =
+        ConfettiController(duration: const Duration(seconds: 3));
+  }
+
+  @override
+  void dispose() {
+    _confettiController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepPurpleAccent,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)),
+                padding:
+                const EdgeInsets.symmetric(vertical: 40, horizontal: 80),
+                elevation: 15,
+                shadowColor: Colors.purpleAccent,
+              ),
+              onPressed: () {
+                _confettiController.play();
+                widget.onPressed();
+              },
+              child: const Text('🌟 3D World 🌐',
+                  style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white)),
+            ),
+            ConfettiWidget(
+              confettiController: _confettiController,
+              blastDirectionality: BlastDirectionality.explosive,
+              shouldLoop: false,
+              colors: [
+                Colors.purple,
+                Colors.deepPurple,
+                Colors.indigo,
+                Colors.yellow,
+                Colors.indigoAccent
+              ],
+              numberOfParticles: 20,
               gravity: 0.2,
             ),
           ],

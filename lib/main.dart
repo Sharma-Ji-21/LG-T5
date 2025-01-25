@@ -16,57 +16,20 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Motion Tab Bar Demo',
-      theme: ThemeData.light().copyWith(
-        primaryColor: Colors.blue,
-        scaffoldBackgroundColor: Colors.white,
-        switchTheme: SwitchThemeData(
-          thumbColor: MaterialStateProperty.resolveWith((states) {
-            if (states.contains(MaterialState.selected)) {
-              return Colors.blue;
-            }
-            return null;
-          }),
-          trackColor: MaterialStateProperty.resolveWith((states) {
-            if (states.contains(MaterialState.selected)) {
-              return Colors.blue.withOpacity(0.5);
-            }
-            return null;
-          }),
-        ),
-      ),
-      darkTheme: ThemeData.dark().copyWith(
+      theme: ThemeData.dark().copyWith(
         primaryColor: Colors.blue,
         scaffoldBackgroundColor: Colors.grey[900],
-        switchTheme: SwitchThemeData(
-          thumbColor: MaterialStateProperty.resolveWith((states) {
-            if (states.contains(MaterialState.selected)) {
-              return Colors.blue;
-            }
-            return null;
-          }),
-          trackColor: MaterialStateProperty.resolveWith((states) {
-            if (states.contains(MaterialState.selected)) {
-              return Colors.blue.withOpacity(0.5);
-            }
-            return null;
-          }),
-        ),
       ),
-      themeMode: ThemeMode.dark,
       home: MainScreen(),
     );
   }
 }
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
-
   @override
   _MainScreenState createState() => _MainScreenState();
 }
@@ -74,7 +37,6 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
   TabController? _tabController;
   int _selectedIndex = 0;
-  bool _isDarkMode = true;
   double _textScaleFactor = 1.0;
 
   @override
@@ -95,17 +57,11 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> screens = [
+    final screens = [
       HomeScreen(),
       ProfileScreen(),
       SettingsScreen(
-        isDarkMode: _isDarkMode,
         textScaleFactor: _textScaleFactor,
-        onThemeChanged: (value) {
-          setState(() {
-            _isDarkMode = value;
-          });
-        },
         onTextScaleFactorChanged: (value) {
           setState(() {
             _textScaleFactor = value;
@@ -114,41 +70,37 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
       ),
     ];
 
-    return Theme(
-      data: _isDarkMode ? ThemeData.dark() : ThemeData.light(),
-      child: MediaQuery(
-        data:
-            MediaQuery.of(context).copyWith(textScaleFactor: _textScaleFactor),
-        child: Scaffold(
-          body: TabBarView(
-            physics: NeverScrollableScrollPhysics(), // Disable swipe
-            controller: _tabController,
-            children: screens,
+    return MediaQuery(
+      data: MediaQuery.of(context).copyWith(textScaleFactor: _textScaleFactor),
+      child: Scaffold(
+        body: TabBarView(
+          physics: NeverScrollableScrollPhysics(),
+          controller: _tabController,
+          children: screens,
+        ),
+        bottomNavigationBar: MotionTabBar(
+          initialSelectedTab: "Home",
+          labels: ["Home", "Profile", "Settings"],
+          icons: [Icons.home, Icons.person, Icons.settings],
+          tabSize: 50,
+          tabBarHeight: 55,
+          textStyle: TextStyle(
+            fontSize: 12,
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
           ),
-          bottomNavigationBar: MotionTabBar(
-            initialSelectedTab: "Home",
-            labels: const ["Home", "Profile", "Settings"],
-            icons: const [Icons.home, Icons.person, Icons.settings],
-            tabSize: 50,
-            tabBarHeight: 55,
-            textStyle: const TextStyle(
-              fontSize: 12,
-              color: Colors.white,
-              fontWeight: FontWeight.w500,
-            ),
-            tabIconColor: _isDarkMode ? Colors.grey[400]! : Colors.grey[600]!,
-            tabIconSize: 28.0,
-            tabIconSelectedSize: 26.0,
-            tabSelectedColor: Theme.of(context).primaryColor,
-            tabIconSelectedColor: Colors.white,
-            tabBarColor: _isDarkMode ? Colors.grey[900]! : Colors.white,
-            onTabItemSelected: (int value) {
-              setState(() {
-                _selectedIndex = value;
-                _tabController?.animateTo(value);
-              });
-            },
-          ),
+          tabIconColor: Colors.grey[400]!,
+          tabIconSize: 28.0,
+          tabIconSelectedSize: 26.0,
+          tabSelectedColor: Theme.of(context).primaryColor,
+          tabIconSelectedColor: Colors.white,
+          tabBarColor: Colors.grey[900]!,
+          onTabItemSelected: (int value) {
+            setState(() {
+              _selectedIndex = value;
+              _tabController?.animateTo(value);
+            });
+          },
         ),
       ),
     );

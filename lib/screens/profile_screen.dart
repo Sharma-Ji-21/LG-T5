@@ -1,35 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../services/ssh_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../services/ssh_service.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  _ProfileScreenState createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
   final _ipController = TextEditingController();
   final _portController = TextEditingController(text: '22');
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   int _currentStep = 0;
-
-  final List<String> _steps = [
-    'IP Address',
-    'Port',
-    'Username',
-    'Password',
-  ];
+  final List<String> _steps = ['IP Address', 'Port', 'Username', 'Password'];
 
   @override
   void initState() {
     super.initState();
     _loadSavedProfile();
+  }
+
+  @override
+  void dispose() {
+    _ipController.dispose();
+    _portController.dispose();
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 
   Future<void> _loadSavedProfile() async {
@@ -39,8 +42,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       _usernameController.text = prefs.getString('username') ?? '';
       _portController.text = (prefs.getInt('port') ?? 22).toString();
       _passwordController.text = prefs.getString('password') ?? '';
-
-      // Update current step based on filled fields
       _updateCurrentStep();
     });
   }
@@ -59,7 +60,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _buildProgressIndicator() {
-    var lineWidth = MediaQuery.of(context).size.width - 32.0; // screen width - 2 * padding
+    var lineWidth = MediaQuery.of(context).size.width - 32.0;
     var space = lineWidth / _steps.length;
     final sshService = Provider.of<SSHService>(context);
 
@@ -67,7 +68,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       height: 60.0,
       child: Stack(
         children: [
-          // Grey base line
           Positioned(
             top: 15,
             left: 0,
@@ -78,19 +78,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
               color: Colors.grey,
             ),
           ),
-          // Blue progress line
           Positioned(
             top: 15,
             left: 0,
             child: Container(
               height: 2.0,
               width: sshService.isConnected
-                  ? lineWidth // Fill the full width when connected
+                  ? lineWidth
                   : space * (_currentStep - 1) + space / 2,
               color: Colors.blue,
             ),
           ),
-          // Circles and labels
           Row(
             children: _steps
                 .asMap()
@@ -120,7 +118,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               width: 20.0,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: sshService.isConnected && i == _steps.length - 1
+                                color: sshService.isConnected &&
+                                    i == _steps.length - 1
                                     ? Colors.blue
                                     : i < _currentStep
                                     ? Colors.blue
@@ -129,7 +128,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           ),
                         ),
-                        if (i < _currentStep - 1 || (sshService.isConnected && i == _steps.length - 1))
+                        if (i < _currentStep - 1 ||
+                            (sshService.isConnected &&
+                                i == _steps.length - 1))
                           const SizedBox(
                             height: 30.0,
                             width: 30.0,
@@ -148,7 +149,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       point,
                       textAlign: TextAlign.left,
                       style: TextStyle(
-                        color: i < _currentStep || (sshService.isConnected && i == _steps.length - 1)
+                        color: i < _currentStep ||
+                            (sshService.isConnected &&
+                                i == _steps.length - 1)
                             ? Colors.blue
                             : Colors.grey,
                       ),
@@ -165,106 +168,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
-      ),
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          // Background Image
-          Image.asset(
-            'assets/bgImg5.jpg',
-            fit: BoxFit.cover,
-          ),
-          SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildProgressIndicator(),
-                    const SizedBox(height: 20),
-                    _buildBlueTextField(
-                      controller: _ipController,
-                      labelText: 'IP Address',
-                      hintText: 'Enter IP address',
-                      prefixIcon: Icons.computer,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter IP address';
-                        }
-                        return null;
-                      },
-                      onChanged: (value) => _updateCurrentStep(),
-                    ),
-                    const SizedBox(height: 10),
-                    _buildBlueTextField(
-                      controller: _portController,
-                      labelText: 'Port',
-                      hintText: 'Enter port number',
-                      prefixIcon: Icons.settings_ethernet,
-                      keyboardType: TextInputType.number,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter port number';
-                        }
-                        return null;
-                      },
-                      onChanged: (value) => _updateCurrentStep(),
-                    ),
-                    const SizedBox(height: 10),
-                    _buildBlueTextField(
-                      controller: _usernameController,
-                      labelText: 'Username',
-                      hintText: 'Enter username',
-                      prefixIcon: Icons.person,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter username';
-                        }
-                        return null;
-                      },
-                      onChanged: (value) => _updateCurrentStep(),
-                    ),
-                    const SizedBox(height: 10),
-                    _buildBlueTextField(
-                      controller: _passwordController,
-                      labelText: 'Password',
-                      hintText: 'Enter password',
-                      prefixIcon: Icons.lock,
-                      obscureText: true,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter password';
-                        }
-                        return null;
-                      },
-                      onChanged: (value) => _updateCurrentStep(),
-                    ),
-                    const SizedBox(height: 20),
-                    _buildConnectButton(),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildBlueTextField({
+  Widget _buildTextField({
     required TextEditingController controller,
     required String labelText,
     required String hintText,
     required IconData prefixIcon,
     required String? Function(String?)? validator,
-    required void Function(String)? onChanged,
     TextInputType? keyboardType,
     bool obscureText = false,
   }) {
@@ -295,7 +204,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       keyboardType: keyboardType,
       obscureText: obscureText,
       validator: validator,
-      onChanged: onChanged,
+      onChanged: (_) => _updateCurrentStep(),
     );
   }
 
@@ -314,67 +223,138 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     port: int.parse(_portController.text),
                   );
 
-                  // Save credentials
                   final prefs = await SharedPreferences.getInstance();
                   await prefs.setString('host', _ipController.text);
                   await prefs.setString('username', _usernameController.text);
                   await prefs.setString('password', _passwordController.text);
                   await prefs.setInt('port', int.parse(_portController.text));
 
-                  if (context.mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Connected successfully'),
-                        backgroundColor: Colors.green,
-                      ),
-                    );
-                    setState(() {
-                      _currentStep = _steps.length; // Set progress to 100%
-                    });
-                  }
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Connected successfully'),
+                      backgroundColor: Colors.green,
+                    ),
+                  );
+                  setState(() {
+                    _currentStep = _steps.length;
+                  });
                 } catch (e) {
-                  if (context.mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Connection failed: ${e.toString()}'),
-                        backgroundColor: Colors.red,
-                      ),
-                    );
-                  }
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Connection failed: ${e.toString()}'),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
                 }
               }
             },
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white,
               backgroundColor: Colors.blue[700],
-              padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30),
               ),
-              elevation: 5,
-              shadowColor: Colors.blue[900],
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(
-                  sshService.isConnected ? Icons.refresh : Icons.connect_without_contact,
-                  color: Colors.white,
-                ),
-                const SizedBox(width: 10),
-                Text(
-                  sshService.isConnected ? 'Reconnect' : 'Connect',
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1.2,
-                  ),
-                ),
+                Icon(sshService.isConnected ? Icons.refresh : Icons.connect_without_contact),
+                SizedBox(width: 10),
+                Text(sshService.isConnected ? 'Reconnect' : 'Connect'),
               ],
             ),
           ),
         );
       },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Profile'),
+      ),
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          Image.asset(
+            'assets/bgImg.jpg',
+            fit: BoxFit.cover,
+          ),
+          SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildProgressIndicator(),
+                    SizedBox(height: 20),
+                    _buildTextField(
+                      controller: _ipController,
+                      labelText: 'IP Address',
+                      hintText: 'Enter IP address',
+                      prefixIcon: Icons.computer,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter IP address';
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 10),
+                    _buildTextField(
+                      controller: _portController,
+                      labelText: 'Port',
+                      hintText: 'Enter port number',
+                      prefixIcon: Icons.settings_ethernet,
+                      keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter port number';
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 10),
+                    _buildTextField(
+                      controller: _usernameController,
+                      labelText: 'Username',
+                      hintText: 'Enter username',
+                      prefixIcon: Icons.person,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter username';
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 10),
+                    _buildTextField(
+                      controller: _passwordController,
+                      labelText: 'Password',
+                      hintText: 'Enter password',
+                      prefixIcon: Icons.lock,
+                      obscureText: true,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter password';
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 20),
+                    _buildConnectButton(),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
