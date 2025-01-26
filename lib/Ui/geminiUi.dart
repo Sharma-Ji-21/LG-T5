@@ -94,7 +94,7 @@ class _GeminiUiState extends State<GeminiUi> with TickerProviderStateMixin {
       onDoubleTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const ChatScreen()),
+          MaterialPageRoute(builder: (context) => ChatScreen()),
         );
       },
       child: Container(
