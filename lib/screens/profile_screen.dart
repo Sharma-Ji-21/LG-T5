@@ -19,6 +19,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   int _currentStep = 0;
   final List<String> _steps = ['IP Address', 'Port', 'Username', 'Password'];
+  final double _textScaleFactor = 1.2;
 
   @override
   void initState() {
@@ -65,7 +66,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final sshService = Provider.of<SSHService>(context);
 
     return SizedBox(
-      height: 60.0,
+      height: 72.0,
       child: Stack(
         children: [
           Positioned(
@@ -75,7 +76,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Container(
               height: 2.0,
               width: double.infinity,
-              color: Colors.grey,
+              color: Colors.grey[300],
             ),
           ),
           Positioned(
@@ -86,7 +87,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               width: sshService.isConnected
                   ? lineWidth
                   : space * (_currentStep - 1) + space / 2,
-              color: Colors.blue,
+              color: Colors.black,
             ),
           ),
           Row(
@@ -108,7 +109,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             border: Border.all(
                               width: 1.5,
                               color: i == _currentStep - 1
-                                  ? Colors.blue
+                                  ? Colors.black
                                   : Colors.transparent,
                             ),
                           ),
@@ -120,10 +121,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 shape: BoxShape.circle,
                                 color: sshService.isConnected &&
                                     i == _steps.length - 1
-                                    ? Colors.blue
+                                    ? Colors.black
                                     : i < _currentStep
-                                    ? Colors.blue
-                                    : Colors.grey,
+                                    ? Colors.black
+                                    : Colors.grey[300],
                               ),
                             ),
                           ),
@@ -148,12 +149,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Text(
                       point,
                       textAlign: TextAlign.left,
+                      textScaleFactor: _textScaleFactor,
                       style: TextStyle(
                         color: i < _currentStep ||
                             (sshService.isConnected &&
                                 i == _steps.length - 1)
-                            ? Colors.blue
-                            : Colors.grey,
+                            ? Colors.black
+                            : Colors.grey[600],
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ],
@@ -177,34 +180,70 @@ class _ProfileScreenState extends State<ProfileScreen> {
     TextInputType? keyboardType,
     bool obscureText = false,
   }) {
-    return TextFormField(
-      controller: controller,
-      decoration: InputDecoration(
-        labelText: labelText,
-        labelStyle: TextStyle(color: Colors.blue[700]),
-        hintText: hintText,
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.blue[300]!, width: 1.5),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.blue[700]!, width: 2),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.red, width: 2),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.red, width: 2),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        prefixIcon: Icon(prefixIcon, color: Colors.blue[700]),
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            spreadRadius: 1,
+            blurRadius: 4,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
-      keyboardType: keyboardType,
-      obscureText: obscureText,
-      validator: validator,
-      onChanged: (_) => _updateCurrentStep(),
+      child: TextFormField(
+        controller: controller,
+        style: TextStyle(
+          color: Colors.black87,
+          fontSize: 16 * _textScaleFactor,
+        ),
+        decoration: InputDecoration(
+          labelText: labelText,
+          labelStyle: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.w500,
+            fontSize: 16 * _textScaleFactor,
+          ),
+          hintText: hintText,
+          hintStyle: TextStyle(
+            color: Colors.grey[400],
+            fontSize: 16 * _textScaleFactor,
+          ),
+          filled: true,
+          fillColor: Colors.white,
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey[300]!, width: 1.0),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.black, width: 2),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.red, width: 1.0),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.red, width: 2),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          prefixIcon: Icon(
+            prefixIcon,
+            color: Colors.black,
+            size: 24 * _textScaleFactor,
+          ),
+          contentPadding: EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 16 * _textScaleFactor,
+          ),
+        ),
+        keyboardType: keyboardType,
+        obscureText: obscureText,
+        validator: validator,
+        onChanged: (_) => _updateCurrentStep(),
+      ),
     );
   }
 
@@ -230,7 +269,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   await prefs.setInt('port', int.parse(_portController.text));
 
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
+                    const SnackBar(
                       content: Text('Connected successfully'),
                       backgroundColor: Colors.green,
                     ),
@@ -250,8 +289,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
             },
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white,
-              backgroundColor: Colors.blue[700],
-              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+              backgroundColor: Colors.black,
+              padding: EdgeInsets.symmetric(
+                horizontal: 50,
+                vertical: 15 * _textScaleFactor,
+              ),
+              elevation: 3,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30),
               ),
@@ -259,9 +302,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(sshService.isConnected ? Icons.refresh : Icons.connect_without_contact),
-                SizedBox(width: 10),
-                Text(sshService.isConnected ? 'Reconnect' : 'Connect'),
+                Icon(
+                  sshService.isConnected
+                      ? Icons.refresh
+                      : Icons.connect_without_contact,
+                  color: Colors.white,
+                  size: 24 * _textScaleFactor,
+                ),
+                SizedBox(width: 10 * _textScaleFactor),
+                Text(
+                  sshService.isConnected ? 'Reconnect' : 'Connect',
+                  style: TextStyle(
+                    fontSize: 16 * _textScaleFactor,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ],
             ),
           ),
@@ -273,87 +328,87 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[50],
       appBar: AppBar(
-        title: Text('Profile'),
-      ),
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          Image.asset(
-            'assets/bgImg.jpg',
-            fit: BoxFit.cover,
+        title: Text(
+          'Profile',
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: 20 * _textScaleFactor,
           ),
-          SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildProgressIndicator(),
-                    SizedBox(height: 20),
-                    _buildTextField(
-                      controller: _ipController,
-                      labelText: 'IP Address',
-                      hintText: 'Enter IP address',
-                      prefixIcon: Icons.computer,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter IP address';
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(height: 10),
-                    _buildTextField(
-                      controller: _portController,
-                      labelText: 'Port',
-                      hintText: 'Enter port number',
-                      prefixIcon: Icons.settings_ethernet,
-                      keyboardType: TextInputType.number,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter port number';
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(height: 10),
-                    _buildTextField(
-                      controller: _usernameController,
-                      labelText: 'Username',
-                      hintText: 'Enter username',
-                      prefixIcon: Icons.person,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter username';
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(height: 10),
-                    _buildTextField(
-                      controller: _passwordController,
-                      labelText: 'Password',
-                      hintText: 'Enter password',
-                      prefixIcon: Icons.lock,
-                      obscureText: true,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter password';
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(height: 20),
-                    _buildConnectButton(),
-                  ],
+        ),
+        backgroundColor: Colors.black,
+        elevation: 2,
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildProgressIndicator(),
+                SizedBox(height: 20 * _textScaleFactor),
+                _buildTextField(
+                  controller: _ipController,
+                  labelText: 'IP Address',
+                  hintText: 'Enter IP address',
+                  prefixIcon: Icons.computer,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter IP address';
+                    }
+                    return null;
+                  },
                 ),
-              ),
+                SizedBox(height: 16 * _textScaleFactor),
+                _buildTextField(
+                  controller: _portController,
+                  labelText: 'Port',
+                  hintText: 'Enter port number',
+                  prefixIcon: Icons.settings_ethernet,
+                  keyboardType: TextInputType.number,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter port number';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 16 * _textScaleFactor),
+                _buildTextField(
+                  controller: _usernameController,
+                  labelText: 'Username',
+                  hintText: 'Enter username',
+                  prefixIcon: Icons.person,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter username';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 16 * _textScaleFactor),
+                _buildTextField(
+                  controller: _passwordController,
+                  labelText: 'Password',
+                  hintText: 'Enter password',
+                  prefixIcon: Icons.lock,
+                  obscureText: true,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter password';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 24 * _textScaleFactor),
+                _buildConnectButton(),
+              ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }

@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Motion Tab Bar Demo',
       theme: ThemeData.dark().copyWith(
-        primaryColor: Colors.blue,
+        primaryColor: Colors.white,
         scaffoldBackgroundColor: Colors.grey[900],
       ),
       home: MainScreen(),
@@ -93,7 +93,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
           tabIconSize: 28.0,
           tabIconSelectedSize: 26.0,
           tabSelectedColor: Theme.of(context).primaryColor,
-          tabIconSelectedColor: Colors.white,
+          tabIconSelectedColor: Colors.black,
           tabBarColor: Colors.grey[900]!,
           onTabItemSelected: (int value) {
             setState(() {

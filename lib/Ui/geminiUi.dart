@@ -98,7 +98,7 @@ class _GeminiUiState extends State<GeminiUi> with TickerProviderStateMixin {
         );
       },
       child: Container(
-        color: Colors.transparent,
+        color: Colors.black,
         child: AnimatedBuilder(
           animation: scaleAnimation,
           builder: (context, child) {

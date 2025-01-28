@@ -66,6 +66,7 @@ flutter:
   assets:
     - assets/kml1.kml
     - assets/kml2.kml
+    - assets/Monkey.dae
     - assets/geminiAnimation/geminiFlower.png
     - assets/geminiAnimation/geminiHexagon.png
     - assets/geminiAnimation/geminiLong.png
@@ -76,6 +77,10 @@ flutter:
     - assets/bgImg.jpg
     - assets/bgImg4.jpg
     - assets/bgImg5.jpg
+    - assets/bgImg6.jpg
+    - assets/bgImg69.png
+    - assets/bgImg123.png
+    - assets/Monkey.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

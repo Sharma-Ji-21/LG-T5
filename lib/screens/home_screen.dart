@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:confetti/confetti.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
@@ -10,8 +9,37 @@ import '../Ui/geminiUi.dart';
 import '../services/ssh_service.dart';
 import 'chat_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final PageController _pageController = PageController();
+  int _currentPage = 0;
+
+  final List<Map<String, dynamic>> _kmlData = [
+    {
+      'name1': 'Diwali',
+      'name2': 'Party',
+      'image': 'assets/bgImg123.png',
+      'kmlFile': 'kml1',
+    },
+    {
+      'name1': '3D',
+      'name2': 'World',
+      'image': 'assets/Monkey.png',
+      'kmlFile': 'kml2',
+    },
+  ];
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   Future<void> _handleKMLUpload(BuildContext context, SSHService sshService, String kmlFileName) async {
     if (!sshService.isConnected) {
@@ -69,304 +97,141 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          Image.asset('assets/bgImg5.jpg', fit: BoxFit.cover),
-          Consumer<SSHService>(
-            builder: (context, sshService, child) {
-              return LayoutBuilder(
-                builder: (context, constraints) {
-                  double upperHalfHeight = constraints.maxHeight / 2;
-                  return Column(
-                    children: [
-                      SizedBox(
-                        height: upperHalfHeight,
-                        child: PageView(
-                          scrollDirection: Axis.horizontal,
-                          physics: PageScrollPhysics(),
-                          children: [
-                            Center(child: DiwaliPartyButton(onPressed: () => _handleKMLUpload(context, sshService, 'kml1'))),
-                            Center(child: World3DButton(onPressed: () => _handleKMLUpload(context, sshService, 'kml2'))),
-                          ],
-                        ),
+      backgroundColor: Colors.white,
+      body: Consumer<SSHService>(
+        builder: (context, sshService, child) {
+          return SafeArea(
+            child: Stack(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Row(
+                        children: [
+                          Text(
+                            "${_kmlData[_currentPage]['name1']}\n",
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 50,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            "${_kmlData[_currentPage]['name2']}",
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 35,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                        ],
                       ),
-                      _buildConnectionStatus(sshService),
-                      _buildActionButtons(context, sshService),
-                    ],
-                  );
-                },
-              );
-            },
-          ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ChatScreen())),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        child: GeminiUi(),
-      ),
-    );
-  }
-
-  Widget _buildConnectionStatus(SSHService sshService) {
-    return Center(
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 19, horizontal: 34),
-        decoration: BoxDecoration(
-          color: sshService.isConnected ? Colors.green[600] : Colors.red[600],
-          borderRadius: BorderRadius.circular(30),
-          boxShadow: [BoxShadow(color: Colors.black26, offset: Offset(0, 2), blurRadius: 6)],
-        ),
-        child: Text(
-          sshService.isConnected ? 'Connected' : 'Disconnected',
-          style: TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.bold),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildActionButtons(BuildContext context, SSHService sshService) {
-    return Expanded(
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            CleanKMLButton(onPressed: () => _handleCleanKML(context, sshService)),
-            SizedBox(height: 10),
-            ElevatedButton.icon(
-              onPressed: sshService.isConnected ? () => _handleRelaunch(context, sshService) : null,
-              icon: Icon(Icons.refresh, color: Colors.blue),
-              label: Text('Relaunch LG', style: TextStyle(color: Colors.blue)),
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.blue,
-                splashFactory: InkRipple.splashFactory,
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class DiwaliPartyButton extends StatefulWidget {
-  final VoidCallback onPressed;
-
-  const DiwaliPartyButton({required this.onPressed, super.key});
-
-  @override
-  State<DiwaliPartyButton> createState() => _DiwaliPartyButtonState();
-}
-
-class _DiwaliPartyButtonState extends State<DiwaliPartyButton> {
-  late ConfettiController _confettiController;
-
-  @override
-  void initState() {
-    super.initState();
-    _confettiController =
-        ConfettiController(duration: const Duration(seconds: 3));
-  }
-
-  @override
-  void dispose() {
-    _confettiController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Stack(
-          alignment: Alignment.center,
-          children: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.orangeAccent,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30)),
-                padding:
-                    const EdgeInsets.symmetric(vertical: 40, horizontal: 80),
-                elevation: 15,
-                shadowColor: Colors.deepOrange,
-              ),
-              onPressed: () {
-                _confettiController.play();
-                widget.onPressed();
-              },
-              child: const Text('🎊 Diwali Party 🎊',
-                  style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white)),
-            ),
-            ConfettiWidget(
-              confettiController: _confettiController,
-              blastDirectionality: BlastDirectionality.explosive,
-              shouldLoop: false,
-              colors: [
-                Colors.red,
-                Colors.orange,
-                Colors.yellow,
-                Colors.green,
-                Colors.blue
+                    ),
+                    Expanded(
+                      child: PageView.builder(
+                        controller: _pageController,
+                        onPageChanged: (index) {
+                          setState(() {
+                            _currentPage = index;
+                          });
+                        },
+                        itemCount: _kmlData.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                            child: ClipPath(
+                              child: Image.asset(
+                                _kmlData[index]['image'],
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          _buildControlButton(
+                            icon: Icons.refresh,
+                            onPressed: () => _handleRelaunch(context, sshService),
+                          ),
+                          _buildControlButton(
+                            icon: Icons.play_arrow,
+                            onPressed: () => _handleKMLUpload(
+                              context,
+                              sshService,
+                              _kmlData[_currentPage]['kmlFile'],
+                            ),
+                            isMain: true,
+                          ),
+                          _buildControlButton(
+                            icon: Icons.cleaning_services,
+                            onPressed: () => _handleCleanKML(context, sshService),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Positioned(
+                  top: 27,
+                  right: 16,
+                  child: Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15), // Added border radius
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          spreadRadius: 1,
+                          blurRadius: 5,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ChatScreen()),
+                        ),
+                        child: const GeminiUi(),
+                      ),
+                    ),
+                  ),
+                ),
               ],
-              numberOfParticles: 20,
-              gravity: 0.2,
             ),
-          ],
-        ),
-      ],
+          );
+        },
+      ),
     );
   }
-}
 
-class CleanKMLButton extends StatefulWidget {
-  final VoidCallback onPressed;
-
-  const CleanKMLButton({required this.onPressed, super.key});
-
-  @override
-  State<CleanKMLButton> createState() => _CleanKMLButtonState();
-}
-
-class _CleanKMLButtonState extends State<CleanKMLButton> {
-  late ConfettiController _confettiController;
-
-  @override
-  void initState() {
-    super.initState();
-    _confettiController =
-        ConfettiController(duration: const Duration(seconds: 3));
-  }
-
-  @override
-  void dispose() {
-    _confettiController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Stack(
-          alignment: Alignment.center,
-          children: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.lightBlueAccent,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30)),
-                padding:
-                    const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                elevation: 15,
-                shadowColor: Colors.blueGrey,
-              ),
-              onPressed: () {
-                _confettiController.play();
-                widget.onPressed();
-              },
-              child: const Text('🧹✨ Clean KML ✨🧼',
-                  style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white)),
-            ),
-            ConfettiWidget(
-              confettiController: _confettiController,
-              blastDirectionality: BlastDirectionality.explosive,
-              shouldLoop: false,
-              colors: [
-                Colors.lightBlue,
-                Colors.white,
-                Colors.tealAccent,
-                Colors.cyan
-              ],
-              numberOfParticles: 25,
-              gravity: 0.2,
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-}
-class World3DButton extends StatefulWidget {
-  final VoidCallback onPressed;
-
-  const World3DButton({required this.onPressed, super.key});
-
-  @override
-  State<World3DButton> createState() => _World3DButtonState();
-}
-
-class _World3DButtonState extends State<World3DButton> {
-  late ConfettiController _confettiController;
-
-  @override
-  void initState() {
-    super.initState();
-    _confettiController =
-        ConfettiController(duration: const Duration(seconds: 3));
-  }
-
-  @override
-  void dispose() {
-    _confettiController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Stack(
-          alignment: Alignment.center,
-          children: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.deepPurpleAccent,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30)),
-                padding:
-                const EdgeInsets.symmetric(vertical: 40, horizontal: 80),
-                elevation: 15,
-                shadowColor: Colors.purpleAccent,
-              ),
-              onPressed: () {
-                _confettiController.play();
-                widget.onPressed();
-              },
-              child: const Text('🌟 3D World 🌐',
-                  style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white)),
-            ),
-            ConfettiWidget(
-              confettiController: _confettiController,
-              blastDirectionality: BlastDirectionality.explosive,
-              shouldLoop: false,
-              colors: [
-                Colors.purple,
-                Colors.deepPurple,
-                Colors.indigo,
-                Colors.yellow,
-                Colors.indigoAccent
-              ],
-              numberOfParticles: 20,
-              gravity: 0.2,
-            ),
-          ],
-        ),
-      ],
+  Widget _buildControlButton({
+    required IconData icon,
+    required VoidCallback onPressed,
+    bool isMain = false,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: isMain ? Colors.black : Colors.grey[500],
+      ),
+      child: IconButton(
+        icon: Icon(icon),
+        onPressed: onPressed,
+        color: isMain ? Colors.white : Colors.black,
+        iconSize: isMain ? 90 : 40,
+        padding: EdgeInsets.all(isMain ? 16 : 12),
+      ),
     );
   }
 }

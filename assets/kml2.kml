@@ -1,33 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
     <Placemark>
-        <name>Pyramid (in Egypt)</name>
-        <description>3d kml model at Egypt</description>
+        <name>Berlin Zoological Garden</name>
+        <description>3d kml model of Zoo</description>
         <Model>
             <Location>
-                <longitude>31.2357</longitude>
-                <latitude>30.0444</latitude>
+                <longitude>13.3374</longitude>
+                <latitude>52.5086</latitude>
                 <altitude>0</altitude>
             </Location>
-            <Orientation>
-                <heading>0</heading>
-                <tilt>0</tilt>
-                <roll>0</roll>
-            </Orientation>
-            <Scale>
-                <x>1</x>
-                <y>1</y>
-                <z>1</z>
-            </Scale>
             <Link>
-                <href>https://raw.githubusercontent.com/LiquidGalaxyLAB/3D-KML-Sample/main/model.dae</href>
+                  <href>https://raw.githubusercontent.com/Sharma-Ji-21/Dae_files/main/Monkey3.dae</href>
             </Link>
-            <ResourceMap>
-                <Alias>
-                    <targetHref>textures/texture.png</targetHref>
-                    <sourceHref>textures/texture.png</sourceHref>
-                </Alias>
-            </ResourceMap>
         </Model>
     </Placemark>
 </kml>

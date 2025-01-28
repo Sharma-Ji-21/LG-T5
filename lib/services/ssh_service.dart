@@ -96,26 +96,29 @@ class SSHService extends ChangeNotifier {
       rethrow;
     }
   }
+  String get _lookAt1 {
+    return "<LookAt><longitude>${13.3374}</longitude><latitude>${52.5086}</latitude><range>${3000}</range><tilt>${0}</tilt><gx:fovy>60</gx:fovy><heading>${0}</heading><gx:altitudeMode>relativeToGround</gx:altitudeMode></LookAt>";
+  }
+
+  Future<void> flytoZoo() async {
+    try {
+      return await executeCommand('echo "flytoview=$_lookAt1" > /tmp/query.txt');
+    } catch (e) {
+      print("Failed to move @Zoo");
+    }
+  }
 
   Future<void> runKML(String kmlName) async {
     if (!_isConnected) throw Exception('Not connected');
+    if(kmlName=="kml2"){
+      flytoZoo();
+    }
     try {
       await executeCommand(
         "echo '\nhttp://lg1:81/$kmlName.kml' > /var/www/html/kmls.txt",
       );
     } catch (error) {
       print("Error during runKml: $error");
-      rethrow;
-    }
-  }
-
-  Future<void> flyTo(String latitude, String longitude) async {
-    if (!_isConnected) throw Exception('Not connected');
-    try {
-      await executeCommand(
-          "echo 'search=$latitude,$longitude' > /tmp/query.txt");
-    } catch (error) {
-      print("Error in flyTo: $error");
       rethrow;
     }
   }
