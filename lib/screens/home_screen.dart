@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
     {
       'name1': '3D',
       'name2': 'World',
-      'image': 'assets/Monkey.png',
+      'image': 'assets/bgImg69.png',
       'kmlFile': 'kml2',
     },
   ];
