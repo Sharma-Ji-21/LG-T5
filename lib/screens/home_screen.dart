@@ -180,20 +180,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 Positioned(
                   top: 27,
-                  right: 16,
+                  right: 6,
                   child: Container(
-                    width: 60,
-                    height: 60,
+                    width: 90,
+                    height: 90,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15), // Added border radius
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          spreadRadius: 1,
-                          blurRadius: 5,
-                          offset: const Offset(0, 2),
-                        ),
-                      ],
+                      // boxShadow: [
+                      //   BoxShadow(
+                      //     color: Colors.black.withOpacity(0.1),
+                      //     spreadRadius: 1,
+                      //     blurRadius: 5,
+                      //     offset: const Offset(0, 2),
+                      //   ),
+                      // ],
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(15),

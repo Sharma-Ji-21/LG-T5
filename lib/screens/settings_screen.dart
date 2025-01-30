@@ -210,6 +210,7 @@ class SettingsScreen extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
+        backgroundColor: Colors.grey[400],
         title: Text(
           'About',
           style: TextStyle(

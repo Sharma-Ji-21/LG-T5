@@ -98,7 +98,7 @@ class _GeminiUiState extends State<GeminiUi> with TickerProviderStateMixin {
         );
       },
       child: Container(
-        color: Colors.black,
+        color: Colors.white,
         child: AnimatedBuilder(
           animation: scaleAnimation,
           builder: (context, child) {
@@ -170,12 +170,12 @@ class _GeminiUiState extends State<GeminiUi> with TickerProviderStateMixin {
                   angle: (scaleAnimation.value + 100) * pi / 1.0,
                   child: Image.asset(
                     'assets/geminiAnimation/star.png',
-                    height: 35.0,
-                    width: 35.0,
+                    height: 55.0,
+                    width: 55.0,
                     color: Colors.grey
-                        .withBlue((100 + scaleAnimation.value).round() + 155)
-                        .withGreen((100 + scaleAnimation.value).round() + 155)
-                        .withRed((100 + scaleAnimation.value).round() + 155),
+                        .withBlue((0 + scaleAnimation.value).round() + 0)
+                        .withGreen((0 + scaleAnimation.value).round() + 0)
+                        .withRed((0 + scaleAnimation.value).round() + 0),
                   ),
                 )
               ],

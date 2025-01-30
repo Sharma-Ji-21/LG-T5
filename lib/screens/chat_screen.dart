@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:ui';
-
+import 'package:speech_to_text/speech_recognition_result.dart';
+import 'package:speech_to_text/speech_to_text.dart';
 import 'package:flutter/material.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -13,6 +14,36 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   late AnimationController _colorController;
   final Random _random = Random();
+  SpeechToText _speechToText = SpeechToText();
+  bool _speechEnabled = false;
+  String _lastWords = 'Hi';
+  bool loaded=false;
+
+  void _initSpeech() async {
+    _speechEnabled = await _speechToText.initialize(debugLogging: true);
+    setState(() {
+      loaded=true;
+    });
+  }
+
+  void _startListening() async {
+    print('111111111111111111111');
+    await _speechToText.listen(onResult: _onSpeechResult);
+    print('22222222222222222222222');
+    setState(() {});
+  }
+
+  void _stopListening() async {
+    await _speechToText.stop();
+    setState(() {});
+  }
+
+  void _onSpeechResult(SpeechRecognitionResult result) {
+    print(result.recognizedWords);
+    setState(() {
+      _lastWords = result.recognizedWords;
+    });
+  }
 
   // Initialize the keyframes immediately
   List<List<int>> _currentKeyframes = List.generate(
@@ -33,6 +64,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    _initSpeech();
     _colorController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 500),
@@ -53,31 +85,50 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: SizedBox(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: Stack(
-          children: [
-            glow(10),
-            glow(9),
-            glow(8),
-            glow(7),
-            const Center(
-              child: Text(
-                'Hi',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 72,
-                ),
-              ),
+      body: Stack(
+        children: [
+          SizedBox(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            child: Stack(
+              children: [
+                blurness(10),
+                blurness(9),
+                blurness(8),
+                blurness(7),
+              ],
             ),
-          ],
-        ),
+          ),
+          // New Positioned widget to place controls at bottom
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 50, // Adjust this value to control distance from bottom
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  _lastWords,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                  ),
+                ),
+                const SizedBox(height: 16), // Spacing between text and icon
+                IconButton(
+                  onPressed: _startListening,
+                  icon: const Icon(Icons.mic, color: Colors.white, size: 32),
+                ),
+                const SizedBox(height: 20), // Bottom padding
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
 
-  Widget glow(double blurrr) {
+  Widget blurness(double intencity) {
     return Stack(
       children: [
         Center(
@@ -136,7 +187,7 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
           ),
         ),
         BackdropFilter(
-          filter: ImageFilter.blur(sigmaY: blurrr, sigmaX: blurrr),
+          filter: ImageFilter.blur(sigmaY: intencity, sigmaX: intencity),
           child: Container(
             height: 400,
             width: 300,
