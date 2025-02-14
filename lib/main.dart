@@ -4,12 +4,12 @@ import 'package:provider/provider.dart';
 import 'screens/home_screen.dart';
 import 'screens/profile_screen.dart';
 import 'screens/settings_screen.dart';
-import 'services/ssh_service.dart';
+import 'services/multi_ssh_service.dart';
 
 void main() {
   runApp(
     ChangeNotifierProvider(
-      create: (_) => SSHService(),
+      create: (_) => MultiSSHService(),
       child: MyApp(),
     ),
   );

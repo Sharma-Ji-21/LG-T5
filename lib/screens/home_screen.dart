@@ -6,7 +6,7 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
 import '../Ui/geminiUi.dart';
-import '../services/ssh_service.dart';
+import '../services/multi_ssh_service.dart';
 import 'chat_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
-  Future<void> _handleKMLUpload(BuildContext context, SSHService sshService, String kmlFileName) async {
+  Future<void> _handleKMLUpload(BuildContext context, MultiSSHService sshService, String kmlFileName) async {
     if (!sshService.isConnected) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please connect to SSH first')));
       return;
@@ -61,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  Future<void> _handleRelaunch(BuildContext context, SSHService sshService) async {
+  Future<void> _handleRelaunch(BuildContext context, MultiSSHService sshService) async {
     if (!sshService.isConnected) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please connect to SSH first')));
       return;
@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  Future<void> _handleCleanKML(BuildContext context, SSHService sshService) async {
+  Future<void> _handleCleanKML(BuildContext context, MultiSSHService sshService) async {
     if (!sshService.isConnected) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Please connect to SSH first')));
       return;
@@ -98,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Consumer<SSHService>(
+      body: Consumer<MultiSSHService>(
         builder: (context, sshService, child) {
           return SafeArea(
             child: Stack(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../services/ssh_service.dart';
+import '../services/multi_ssh_service.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -48,7 +48,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   void _updateCurrentStep() {
-    final sshService = Provider.of<SSHService>(context, listen: false);
+    final sshService = Provider.of<MultiSSHService>(context, listen: false);
     int completedFields = 0;
     if (_ipController.text.isNotEmpty) completedFields++;
     if (_portController.text.isNotEmpty) completedFields++;
@@ -63,7 +63,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget _buildProgressIndicator() {
     var lineWidth = MediaQuery.of(context).size.width - 32.0;
     var space = lineWidth / _steps.length;
-    final sshService = Provider.of<SSHService>(context);
+    final sshService = Provider.of<MultiSSHService>(context);
 
     return SizedBox(
       height: 72.0,
@@ -248,35 +248,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _buildConnectButton() {
-    return Consumer<SSHService>(
-      builder: (context, sshService, child) {
+    return Consumer<MultiSSHService>(
+      builder: (context, MultiSSHService, child) {
         return Center(
           child: ElevatedButton(
             onPressed: () async {
               if (_formKey.currentState!.validate()) {
                 try {
-                  await sshService.connect(
+                  final connectionId = await MultiSSHService.connect(
                     host: _ipController.text,
                     username: _usernameController.text,
                     password: _passwordController.text,
                     port: int.parse(_portController.text),
                   );
 
-                  final prefs = await SharedPreferences.getInstance();
-                  await prefs.setString('host', _ipController.text);
-                  await prefs.setString('username', _usernameController.text);
-                  await prefs.setString('password', _passwordController.text);
-                  await prefs.setInt('port', int.parse(_portController.text));
-
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Connected successfully'),
+                    SnackBar(
+                      content: Text('Connected successfully (Connection ID: $connectionId)'),
                       backgroundColor: Colors.green,
                     ),
                   );
-                  setState(() {
-                    _currentStep = _steps.length;
-                  });
                 } catch (e) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
@@ -303,7 +294,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Icon(
-                  sshService.isConnected
+                  MultiSSHService.isConnected
                       ? Icons.refresh
                       : Icons.connect_without_contact,
                   color: Colors.white,
@@ -311,7 +302,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 SizedBox(width: 10 * _textScaleFactor),
                 Text(
-                  sshService.isConnected ? 'Reconnect' : 'Connect',
+                  MultiSSHService.isConnected ? 'Reconnect' : 'Connect',
                   style: TextStyle(
                     fontSize: 16 * _textScaleFactor,
                     fontWeight: FontWeight.w600,
