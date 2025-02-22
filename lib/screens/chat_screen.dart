@@ -3,6 +3,9 @@ import 'dart:ui';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../services/multi_ssh_service.dart';
+import 'package:flutter_tts/flutter_tts.dart';  // Add this package for text-to-speech
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -17,20 +20,40 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   SpeechToText _speechToText = SpeechToText();
   bool _speechEnabled = false;
   String _lastWords = 'Hi';
-  bool loaded=false;
+  bool loaded = false;
+  FlutterTts _flutterTts = FlutterTts();  // TTS engine
+  List<String> _commandHistory = [];  // Store command history
+  bool _isProcessingCommand = false;  // Flag to prevent multiple commands processing
 
   void _initSpeech() async {
     _speechEnabled = await _speechToText.initialize(debugLogging: true);
+    await _initTts();
     setState(() {
-      loaded=true;
+      loaded = true;
     });
+    // Initial greeting for visually impaired users
+    _speak("Voice assistant ready. Say 'help' for available commands.");
+  }
+
+  Future<void> _initTts() async {
+    await _flutterTts.setLanguage("en-US");
+    await _flutterTts.setSpeechRate(0.5);  // Slower speech for better understanding
+    await _flutterTts.setVolume(1.0);
+    await _flutterTts.setPitch(1.0);
+  }
+
+  Future<void> _speak(String text) async {
+    await _flutterTts.speak(text);
   }
 
   void _startListening() async {
-    print('111111111111111111111');
-    await _speechToText.listen(onResult: _onSpeechResult);
-    print('22222222222222222222222');
-    setState(() {});
+    if (!_isProcessingCommand) {
+      await _speechToText.listen(onResult: _onSpeechResult);
+      _speak("Listening...");
+      setState(() {});
+    } else {
+      _speak("Still processing previous command. Please wait.");
+    }
   }
 
   void _stopListening() async {
@@ -42,7 +65,92 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     print(result.recognizedWords);
     setState(() {
       _lastWords = result.recognizedWords;
+      _commandHistory.add(result.recognizedWords);
+      if (_commandHistory.length > 10) {  // Keep only last 10 commands
+        _commandHistory.removeAt(0);
+      }
     });
+
+    // Process the command after recognition
+    _processVoiceCommand(result.recognizedWords);
+  }
+
+  Future<void> _processVoiceCommand(String command) async {
+    setState(() {
+      _isProcessingCommand = true;
+    });
+
+    final lowercaseCommand = command.toLowerCase();
+    final sshService = Provider.of<MultiSSHService>(context, listen: false);
+
+    try {
+      // Help command
+      if (lowercaseCommand.contains('help')) {
+        _speak("Available commands include: run KML, clean KML, go to profile, go home, connect, disconnect, and help. For specific KML files, say 'run' followed by the KML name.");
+      }
+
+      // Navigation commands
+      else if (lowercaseCommand.contains('go to profile') || lowercaseCommand.contains('open profile')) {
+        _speak("Opening profile screen");
+        Navigator.pushNamed(context, '/profile');
+      }
+      else if (lowercaseCommand.contains('go home') || lowercaseCommand.contains('go to home')) {
+        _speak("Going to home screen");
+        Navigator.pushNamed(context, '/home');
+      }
+
+      // SSH commands - only if connected
+      else if (sshService.isConnected) {
+        // Run KML command
+        if (lowercaseCommand.startsWith('run ')) {
+          final kmlName = command.substring(4).trim();
+          _speak("Running KML file: $kmlName");
+          await sshService.runKML(kmlName);
+        }
+
+        // Clean KML command
+        else if (lowercaseCommand.contains('clean kml')) {
+          _speak("Cleaning KML files");
+          await sshService.cleanKML();
+        }
+
+        // Relaunch command
+        else if (lowercaseCommand.contains('relaunch')) {
+          _speak("Relaunching Liquid Galaxy");
+          // You'll need to get these values from somewhere - maybe a settings page
+          await sshService.relaunchLG('lg', 'password');
+        }
+
+        // Fly to location
+        else if (lowercaseCommand.contains('fly to zoo')) {
+          _speak("Flying to zoo location");
+          await sshService.flytoZoo();
+        }
+
+        // Disconnect command
+        else if (lowercaseCommand.contains('disconnect')) {
+          _speak("Disconnecting from server");
+          await sshService.disconnectAll();
+        }
+      }
+
+      // Connection command - if not connected
+      else if (lowercaseCommand.contains('connect') && !sshService.isConnected) {
+        _speak("Please go to profile page to connect");
+        Navigator.pushNamed(context, '/profile');
+      }
+
+      // Command not recognized
+      else {
+        _speak("Command not recognized. Say 'help' for available commands.");
+      }
+    } catch (e) {
+      _speak("Error executing command: ${e.toString()}");
+    } finally {
+      setState(() {
+        _isProcessingCommand = false;
+      });
+    }
   }
 
   // Initialize the keyframes immediately
@@ -99,27 +207,150 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
               ],
             ),
           ),
-          // New Positioned widget to place controls at bottom
+          // Content area with last command and history
+          Positioned(
+            left: 20,
+            right: 20,
+            top: 80,
+            bottom: 150,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "Voice Assistant",
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 20),
+                Container(
+                  padding: EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Last Command:",
+                        style: TextStyle(
+                          color: Colors.white70,
+                          fontSize: 16,
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        _lastWords,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 24,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 20),
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Command History:",
+                          style: TextStyle(
+                            color: Colors.white70,
+                            fontSize: 16,
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        Expanded(
+                          child: ListView.builder(
+                            itemCount: _commandHistory.length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 4.0),
+                                child: Text(
+                                  _commandHistory[_commandHistory.length - 1 - index],
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // Controls at bottom
           Positioned(
             left: 0,
             right: 0,
-            bottom: 50, // Adjust this value to control distance from bottom
+            bottom: 50,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  _lastWords,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
+                Consumer<MultiSSHService>(
+                  builder: (context, sshService, child) => Text(
+                    sshService.isConnected
+                        ? "Connected - Say your command"
+                        : "Not Connected - Say 'connect' or 'go to profile'",
+                    style: TextStyle(
+                      color: Colors.white70,
+                      fontSize: 16,
+                    ),
                   ),
                 ),
-                const SizedBox(height: 16), // Spacing between text and icon
-                IconButton(
-                  onPressed: _startListening,
-                  icon: const Icon(Icons.mic, color: Colors.white, size: 32),
+                SizedBox(height: 16),
+                Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: LinearGradient(
+                      colors: [Colors.blue.shade400, Colors.purple.shade400],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.blue.withOpacity(0.5),
+                        spreadRadius: 3,
+                        blurRadius: 10,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                  child: IconButton(
+                    onPressed: _speechToText.isNotListening ? _startListening : _stopListening,
+                    icon: Icon(
+                        _speechToText.isNotListening ? Icons.mic : Icons.stop,
+                        color: Colors.white,
+                        size: 32
+                    ),
+                    padding: EdgeInsets.all(16),
+                  ),
                 ),
-                const SizedBox(height: 20), // Bottom padding
+                SizedBox(height: 12),
+                Text(
+                  _speechToText.isNotListening ? "Tap to speak" : "Listening...",
+                  style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 16,
+                  ),
+                ),
               ],
             ),
           ),
@@ -201,6 +432,8 @@ class _ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   @override
   void dispose() {
     _colorController.dispose();
+    _speechToText.cancel();
+    _flutterTts.stop();
     super.dispose();
   }
 }
